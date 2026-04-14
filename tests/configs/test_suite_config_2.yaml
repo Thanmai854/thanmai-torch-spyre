@@ -6,31 +6,6 @@ test_suite_config:
         - names: # Tests that pass with no special config needed
             - TestViewOps::test_as_strided_gradients
           mode: mandatory_success
-        - names: # Tests that pass with extra dtypes allowed
-            - TestViewOps::test_conj_self
-          mode: mandatory_success
-          edits:
-            dtypes:
-              include:
-                - name: bfloat16
-                - name: int16
-        - names: # Tests that pass for float16 but fail for int64
-            - TestOldViewOps::test_transposes_errors   # NotImplementedError aten::random_.from https://github.com/torch-spyre/torch-spyre/issues/549 
-          mode: mandatory_success
-          edits:
-            dtypes:
-              exclude:
-                - name: int64
-        - names: # Tests that fail 
-            - TestViewOps::test_advanced_indexing_nonview   # NotImplementedError: Could not run 'aten::index.Tensor_out' https://github.com/torch-spyre/torch-spyre/issues/1219
-            - TestOldViewOps::test_transposes   # RuntimeError: Comparing, Error in codegen for ComputedBuffer https://github.com/torch-spyre/torch-spyre/issues/1226 (float16),  NotImplementedError aten::random_.from https://github.com/torch-spyre/torch-spyre/issues/549 (int64)
-            - TestOldViewOps::test_view_all_dtypes_and_devices   # RuntimeError: Spyre backend does not support dtype Double https://github.com/torch-spyre/torch-spyre/issues/1228
-          mode: xfail
-        - names: # Tests that are not supported OR crash pytest with seg faults
-            - TestOldViewOps::test_view_empty   # Segmentation fault https://github.com/torch-spyre/torch-spyre/issues/1229
-            - TestOldViewOps::test_view    # Segmentation fault https://github.com/torch-spyre/torch-spyre/issues/1231
-          mode: skip
-
   global:
     supported_dtypes:
       - name: float16

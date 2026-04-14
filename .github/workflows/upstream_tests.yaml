@@ -35,6 +35,8 @@ jobs:
             config: test_suite_config.yaml
           - name: Profiler
             config: test_profiler_config.yaml
+          - name: Sample
+            config: test_suite_config_2.yaml
 
     steps:
       - name: Checkout torch-spyre repository
