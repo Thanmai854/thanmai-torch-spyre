@@ -390,19 +390,14 @@ class TorchTestBase(PrivateUse1TestBase):  # type: ignore[name-defined]  # noqa:
 
         # Register tags in global registry for XML reporting
         if tags:
-            import sys
-            conftest_module = sys.modules.get('conftest')
-            if conftest_module and hasattr(conftest_module, '_TEST_TAGS_REGISTRY'):
-                registry = conftest_module._TEST_TAGS_REGISTRY
-                # Register tags for all generated test methods
-                for method_name in new_methods:
-                    # Build the nodeid that pytest will use
-                    # Format: test_file.py::ClassName::method_name
-                    test_nodeid = f"test_view_ops.py::{cls.__name__}::{method_name}"
-                    registry[test_nodeid] = tags
-                    os.write(2, f"[DEBUG] Registered {test_nodeid} with tags {tags}\n".encode())
-            else:
-                os.write(2, b"[DEBUG] Could not access _TEST_TAGS_REGISTRY\n")
+            import shared_config
+            # Register tags for all generated test methods
+            for method_name in new_methods:
+                # Build the nodeid that pytest will use
+                # Format: test_file.py::ClassName::method_name
+                test_nodeid = f"test_view_ops.py::{cls.__name__}::{method_name}"
+                shared_config.TEST_TAGS_REGISTRY[test_nodeid] = tags
+                os.write(2, f"[DEBUG] Registered {test_nodeid} with tags {tags}\n".encode())
 
         for method_name in new_methods:
             enabled, reason, is_xfail, is_strict = cls._should_run(
