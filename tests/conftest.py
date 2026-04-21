@@ -317,20 +317,6 @@ def pytest_configure(config):
 def pytest_collection_modifyitems(config, items):
     selected_models = config.getoption("--model") or []
     
-    # Add markers/tags as user properties for XML reporting
-    for item in items:
-        # Extract all custom markers (excluding built-in pytest marks)
-        markers = []
-        for marker in item.iter_markers():
-            # Skip built-in pytest marks
-            if marker.name not in ['parametrize', 'skip', 'skipif', 'xfail',
-                                    'usefixtures', 'filterwarnings', 'timeout']:
-                markers.append(marker.name)
-        
-        if markers:
-            # Add markers as user properties for XML report
-            item.user_properties.append(("tags", ",".join(sorted(markers))))
-    
     if not selected_models:
         return  # normal behavior
 
@@ -348,6 +334,27 @@ def pytest_collection_modifyitems(config, items):
     if deselect:
         config.hook.pytest_deselected(items=deselect)
         items[:] = keep
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    """Add tags to test reports for XML output."""
+    outcome = yield
+    report = outcome.get_result()
+    
+    # Only add properties during setup phase to avoid duplicates
+    if report.when == "setup":
+        # Extract all custom markers (excluding built-in pytest marks)
+        markers = []
+        for marker in item.iter_markers():
+            # Skip built-in pytest marks
+            if marker.name not in ['parametrize', 'skip', 'skipif', 'xfail',
+                                    'usefixtures', 'filterwarnings', 'timeout']:
+                markers.append(marker.name)
+        
+        if markers:
+            # Add markers as user properties for XML report
+            report.user_properties.append(("tags", ",".join(sorted(markers))))
 
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
