@@ -20,6 +20,9 @@ import pytest
 
 import shared_config
 
+# Global registry to store test tags for XML reporting
+_TEST_TAGS_REGISTRY = {}
+
 
 def _get_case_marks(case: dict) -> set[str]:
     """
@@ -344,17 +347,12 @@ def pytest_runtest_makereport(item, call):
     
     # Only add properties during setup phase to avoid duplicates
     if report.when == "setup":
-        # Extract all custom markers (excluding built-in pytest marks)
-        markers = []
-        for marker in item.iter_markers():
-            # Skip built-in pytest marks
-            if marker.name not in ['parametrize', 'skip', 'skipif', 'xfail',
-                                    'usefixtures', 'filterwarnings', 'timeout']:
-                markers.append(marker.name)
-        
-        if markers:
-            # Add markers as user properties for XML report
-            report.user_properties.append(("tags", ",".join(sorted(markers))))
+        # Check if tags were registered for this test
+        test_id = item.nodeid
+        if test_id in _TEST_TAGS_REGISTRY:
+            tags = _TEST_TAGS_REGISTRY[test_id]
+            if tags:
+                report.user_properties.append(("tags", ",".join(sorted(tags))))
 
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):

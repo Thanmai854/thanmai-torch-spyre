@@ -308,6 +308,11 @@ class TorchTestBase(PrivateUse1TestBase):  # type: ignore[name-defined]  # noqa:
                 f"[OOTDeviceTestBase] {generic_cls.__name__}::{name} "
                 f"tags: [{', '.join(tags)}]\n".encode(),
             )
+        
+        # Store tags for XML reporting - will be registered after test methods are created
+        if not hasattr(cls, '_test_tags_map'):
+            cls._test_tags_map = {}
+        cls._test_tags_map[name] = tags
 
         # op list filtering
         supported_ops = cls._get_supported_ops()
@@ -382,6 +387,19 @@ class TorchTestBase(PrivateUse1TestBase):  # type: ignore[name-defined]  # noqa:
         existing_methods = set(cls.__dict__.keys())
         super().instantiate_test(name, test, generic_cls=generic_cls)
         new_methods = set(cls.__dict__.keys()) - existing_methods
+
+        # Register tags in global registry for XML reporting
+        if tags:
+            import sys
+            conftest_module = sys.modules.get('conftest')
+            if conftest_module and hasattr(conftest_module, '_TEST_TAGS_REGISTRY'):
+                registry = conftest_module._TEST_TAGS_REGISTRY
+                # Register tags for all generated test methods
+                for method_name in new_methods:
+                    # Build the nodeid that pytest will use
+                    # Format: test_file.py::ClassName::method_name
+                    test_nodeid = f"test_view_ops.py::{cls.__name__}::{method_name}"
+                    registry[test_nodeid] = tags
 
         for method_name in new_methods:
             enabled, reason, is_xfail, is_strict = cls._should_run(
