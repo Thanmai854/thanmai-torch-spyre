@@ -20,6 +20,9 @@ import pytest
 
 import shared_config
 
+# Register the tags plugin to capture tags in XML reports
+pytest_plugins = ["pytest_tags_plugin"]
+
 
 def _get_case_marks(case: dict) -> set[str]:
     """
