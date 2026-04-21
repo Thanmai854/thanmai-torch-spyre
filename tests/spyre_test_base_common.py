@@ -400,6 +400,9 @@ class TorchTestBase(PrivateUse1TestBase):  # type: ignore[name-defined]  # noqa:
                     # Format: test_file.py::ClassName::method_name
                     test_nodeid = f"test_view_ops.py::{cls.__name__}::{method_name}"
                     registry[test_nodeid] = tags
+                    os.write(2, f"[DEBUG] Registered {test_nodeid} with tags {tags}\n".encode())
+            else:
+                os.write(2, b"[DEBUG] Could not access _TEST_TAGS_REGISTRY\n")
 
         for method_name in new_methods:
             enabled, reason, is_xfail, is_strict = cls._should_run(

@@ -347,12 +347,27 @@ def pytest_runtest_makereport(item, call):
     
     # Only add properties during setup phase to avoid duplicates
     if report.when == "setup":
+        # DUMMY TAG TEST: Add a hardcoded tag to every test to verify the mechanism works
+        os.write(2, f"[DEBUG] Adding DUMMY tag to {item.nodeid}\n".encode())
+        report.user_properties.append(("tags", "dummy_test_tag"))
+        
         # Check if tags were registered for this test
         test_id = item.nodeid
+        
+        # Debug: print what we're looking for
+        os.write(2, f"[DEBUG] Looking for nodeid: {test_id}\n".encode())
+        os.write(2, f"[DEBUG] Registry has {len(_TEST_TAGS_REGISTRY)} entries\n".encode())
+        if _TEST_TAGS_REGISTRY:
+            os.write(2, f"[DEBUG] Sample registry keys: {list(_TEST_TAGS_REGISTRY.keys())[:3]}\n".encode())
+        
         if test_id in _TEST_TAGS_REGISTRY:
             tags = _TEST_TAGS_REGISTRY[test_id]
             if tags:
-                report.user_properties.append(("tags", ",".join(sorted(tags))))
+                os.write(2, f"[DEBUG] Adding tags {tags} to {test_id}\n".encode())
+                # Add real tags in addition to dummy
+                report.user_properties.append(("real_tags", ",".join(sorted(tags))))
+        else:
+            os.write(2, f"[DEBUG] No tags found for {test_id}\n".encode())
 
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
