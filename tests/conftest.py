@@ -20,9 +20,6 @@ import pytest
 
 import shared_config
 
-# Register the tags plugin to capture tags in XML reports
-pytest_plugins = ["pytest_tags_plugin"]
-
 
 def _get_case_marks(case: dict) -> set[str]:
     """
@@ -319,6 +316,21 @@ def pytest_configure(config):
 
 def pytest_collection_modifyitems(config, items):
     selected_models = config.getoption("--model") or []
+    
+    # Add markers/tags as user properties for XML reporting
+    for item in items:
+        # Extract all custom markers (excluding built-in pytest marks)
+        markers = []
+        for marker in item.iter_markers():
+            # Skip built-in pytest marks
+            if marker.name not in ['parametrize', 'skip', 'skipif', 'xfail',
+                                    'usefixtures', 'filterwarnings', 'timeout']:
+                markers.append(marker.name)
+        
+        if markers:
+            # Add markers as user properties for XML report
+            item.user_properties.append(("tags", ",".join(sorted(markers))))
+    
     if not selected_models:
         return  # normal behavior
 
