@@ -19,7 +19,7 @@ import pytest
 
 
 import shared_config
-
+print(f"\n>>> LOADING CONFTEST FROM: {os.path.abspath(__file__)}_ torch spyre")
 
 def _get_case_marks(case: dict) -> set[str]:
     """
@@ -315,6 +315,7 @@ def pytest_configure(config):
 
 
 def pytest_collection_modifyitems(config, items):
+    print("Dynamically adding marker")
     selected_models = config.getoption("--model") or []
     
     if not selected_models:
@@ -325,6 +326,8 @@ def pytest_collection_modifyitems(config, items):
     deselect = []
 
     for item in items:
+        custom_marker = f"thanmai-marker-for-{item.name}"
+        item.user_properties.append(("thanmai-marker", custom_marker))
         marker_names = [mark.name for mark in item.iter_markers()]
         if marker_names:
             # Join multiple markers with a comma
