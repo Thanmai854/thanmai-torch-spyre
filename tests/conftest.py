@@ -349,6 +349,7 @@ def pytest_runtest_makereport(item, call):
     if report.when == 'call':
         # Get all custom marks (excluding internal pytest marks)
         for mark in item.iter_markers():
+            os.write(2, f"[DEBUG]Adding mark {mark.name} to {item.nodeid}\n".encode())
             # record_property is a built-in way to add to XML
             item.user_properties.append((mark.name, True))
 

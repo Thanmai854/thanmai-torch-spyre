@@ -792,7 +792,7 @@ for i in "${!RUN_FILES[@]}"; do
 
     (
         cd "$run_dir"
-        python3 -m pytest "$run_basename" "${EXTRA_PYTEST_ARGS[@]}" || true
+        python3 -m pytest -s -p conftest "$run_basename" "${EXTRA_PYTEST_ARGS[@]}" || true
     )
 
     _exit=$?
