@@ -325,6 +325,10 @@ def pytest_collection_modifyitems(config, items):
     deselect = []
 
     for item in items:
+        marker_names = [mark.name for mark in item.iter_markers()]
+        if marker_names:
+            # Join multiple markers with a comma
+            item.user_properties.append(("markers", ", ".join(marker_names)))
         # item.nodeid includes the file path, e.g. "tests/models/test_model_ops.py::test_model_ops[...]"
         if "tests/models/test_model_ops.py::" in item.nodeid:
             keep.append(item)
