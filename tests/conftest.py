@@ -303,7 +303,7 @@ def pytest_configure(config):
         with open(yaml_path) as f:
             raw = yaml.safe_load(f) or {}
         tags: set = set()
-        for file_entry in raw.get("test_suite_config", {}).get("files", []):
+        for file_entry in raw.get("files", []):
             for test_entry in file_entry.get("tests", []):
                 for tag in test_entry.get("tags", []):
                     tags.add(tag)
@@ -342,6 +342,12 @@ def pytest_runtest_makereport(item, call):
     outcome = yield
     report = outcome.get_result()
     
+    if report.when == 'call':
+        # Get all custom marks (excluding internal pytest marks)
+        for mark in item.iter_markers():
+            # record_property is a built-in way to add to XML
+            item.user_properties.append((mark.name, True))
+
     # Only add properties during setup phase to avoid duplicates
     if report.when == "setup":
         # DUMMY TAG TEST: Add a hardcoded tag to every test to verify the mechanism works

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites name="pytest tests">
+    <testsuite name="pytest" errors="0" failures="0" skipped="89" tests="105" time="15.735" timestamp="2026-04-16T11:15:24.431992+00:00" hostname="thanmaiboddoju-spyre-dev-pf-3">
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_T_view_spyre" time="12.572">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_advanced_indexing_assignment_spyre" time="0.122">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_advanced_indexing_nonview_spyre" time="0.004">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_as_strided_gradients_spyre" time="0.093" />
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_as_strided_inplace_view_spyre" time="0.004">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_as_strided_view_spyre" time="0.003">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_basic_indexing_ellipses_view_spyre" time="0.005">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_basic_indexing_newaxis_view_spyre" time="0.005">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_basic_indexing_slice_view_spyre" time="0.006">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_chunk_view_spyre" time="0.000">
+            <skipped type="pytest.skip" message="See https://github.com/pytorch/pytorch/pull/32720">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:967: See https://github.com/pytorch/pytorch/pull/32720</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_conj_self_spyre_bfloat16" time="0.003" />
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_conj_self_spyre_float16" time="0.003" />
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_conj_self_spyre_float32" time="0.002" />
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_conj_self_spyre_float64" time="0.002" />
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_conj_self_spyre_int16" time="0.002" />
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_conj_self_spyre_int32" time="0.002" />
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_conj_self_spyre_int64" time="0.002" />
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_conj_self_spyre_int8" time="0.002" />
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_conj_self_spyre_uint8" time="0.002" />
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_conj_view_with_shared_memory_spyre" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:507: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_contiguous_nonview_spyre" time="0.003">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_contiguous_self_spyre" time="0.003" />
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_diagonal_view_spyre" time="0.003">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_expand_as_view_spyre" time="0.137">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_expand_view_spyre" time="0.004">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_flatten_nonview_spyre" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:900: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_flatten_view_spyre" time="0.133">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_imag_noncomplex_spyre_float16" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:450: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_imag_noncomplex_spyre_int64" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:450: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_movedim_view_spyre" time="0.002">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_narrow_view_spyre" time="0.005">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_permute_view_spyre" time="0.004">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_reshape_as_view_spyre" time="0.004">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_reshape_nonview_spyre" time="0.003">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_reshape_view_spyre" time="0.004">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_select_view_spyre" time="0.004">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_split_view_spyre" time="0.000">
+            <skipped type="pytest.skip" message="See https://github.com/pytorch/pytorch/pull/32720">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:978: See https://github.com/pytorch/pytorch/pull/32720</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_squeeze_inplace_view_spyre" time="0.003">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_squeeze_view_spyre" time="0.123">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_t_inplace_view_spyre" time="0.004">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_t_view_spyre" time="0.004">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_transpose_inplace_view_spyre" time="0.004">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_transpose_view_spyre" time="0.004">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_unbind_spyre" time="0.004" />
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_unbind_view_spyre" time="0.002">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_unfold_view_spyre" time="0.111">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_unsqueeze_inplace_view_spyre" time="0.003">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_unsqueeze_view_spyre" time="0.003">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_as_complex_spyre" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:313: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_as_view_spyre" time="0.003">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_copy_out_spyre" time="0.002">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_copy_output_contiguous_spyre" time="0.002">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_copy_spyre" time="0.002">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_dtype_new_spyre_float16" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:158: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_dtype_new_spyre_int64" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:158: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_dtype_upsize_errors_spyre_float16" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:276: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_dtype_upsize_errors_spyre_int64" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:276: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_tensor_dsplit_spyre_float16" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:439: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_tensor_dsplit_spyre_int64" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:439: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_tensor_hsplit_spyre_float16" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:417: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_tensor_hsplit_spyre_int64" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:417: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_tensor_split_spyre_float16" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:405: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_tensor_split_spyre_int64" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:405: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_tensor_vsplit_spyre_float16" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:428: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_tensor_vsplit_spyre_int64" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:428: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestViewOpsPRIVATEUSE1" name="test_view_view_spyre" time="0.003">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_T_spyre" time="0.313">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_as_strided_overflow_storage_offset_spyre" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:2024: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_atleast_gradient_spyre" time="0.046" />
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_big_transpose_spyre" time="0.004">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_broadcast_shapes_spyre" time="0.001">
+            <skipped type="pytest.skip" message="Only runs on ['cpu', 'spyre']">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:1637: Only runs on ['cpu', 'spyre']</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_broadcast_to_spyre_float16" time="0.006">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_broadcast_to_spyre_int64" time="0.001">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_chunk_spyre" time="0.001">
+            <skipped type="pytest.skip" message="Only runs on ['cpu', 'spyre']">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:1377: Only runs on ['cpu', 'spyre']</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_conj_neg_view_numpy_error_spyre" time="0.001">
+            <skipped type="pytest.skip" message="Only runs on ['cpu', 'spyre']">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:2041: Only runs on ['cpu', 'spyre']</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_contiguous_spyre" time="0.002" />
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_crow_col_indices_spyre" time="0.001">
+            <skipped type="pytest.skip" message="Only runs on ['cpu', 'spyre']">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:2065: Only runs on ['cpu', 'spyre']</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_expand_spyre" time="0.004">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_flatten_spyre" time="0.002">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_memory_format_resize__spyre" time="0.002">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_memory_format_resize_as_spyre" time="0.002">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_narrow_spyre" time="0.001">
+            <skipped type="pytest.skip" message="Only runs on ['cpu', 'spyre']">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:1277: Only runs on ['cpu', 'spyre']</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_narrow_tensor_spyre" time="0.001">
+            <skipped type="pytest.skip" message="Only runs on ['cpu', 'spyre']">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:1292: Only runs on ['cpu', 'spyre']</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_python_types_spyre" time="0.001">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_ravel_spyre" time="0.007">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_reshape_spyre" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:1179: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_reshape_view_semantics_spyre_float16" time="0.002">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_reshape_view_semantics_spyre_int64" time="0.001">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_resize_all_dtypes_and_devices_spyre" time="0.002">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_resize_as_all_dtypes_and_devices_spyre" time="0.003">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_resize_as_preserves_strides_spyre" time="0.001" />
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_resize_overflow_spyre" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:2012: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_split_spyre" time="0.001">
+            <skipped type="pytest.skip" message="Only runs on ['cpu', 'spyre']">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:1336: Only runs on ['cpu', 'spyre']</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_t_spyre" time="0.001">
+            <skipped type="pytest.skip" message="Only runs on ['cpu', 'spyre']">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:1304: Only runs on ['cpu', 'spyre']</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_tensor_split_errors_spyre" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:1932: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_tensor_split_indices_spyre_float16" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:1885: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_tensor_split_indices_spyre_int64" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:1885: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_tensor_split_sections_spyre_float16" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:1852: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_tensor_split_sections_spyre_int64" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:1852: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_transpose_invalid_spyre_int64" time="0.001">
+            <skipped type="pytest.skip" message="onlyNativeDeviceTypes: doesn't run on privateuse1">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:1502: onlyNativeDeviceTypes: doesn't run on privateuse1</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_transposes_errors_spyre_float16" time="0.005" />
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_transposes_spyre_float16" time="0.143">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_transposes_spyre_int64" time="0.001">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_unsqueeze_spyre" time="0.001">
+            <skipped type="pytest.skip" message="Only runs on ['cpu', 'spyre']">/home/thanmaiboddoju/dt-inductor/pytorch/test/test_view_ops.py:1400: Only runs on ['cpu', 'spyre']</skipped>
+        </testcase>
+        <testcase classname="test.test_view_ops.TestOldViewOpsPRIVATEUSE1" name="test_view_all_dtypes_and_devices_spyre" time="0.002">
+            <skipped type="pytest.xfail" message="" />
+        </testcase>
+    </testsuite>
+</testsuites>
