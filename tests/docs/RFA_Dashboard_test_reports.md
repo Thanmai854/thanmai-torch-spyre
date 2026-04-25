@@ -7,7 +7,7 @@
 **Purpose:** Approval to Implement Dashboard Solution
 **Date:** April 20, 2026
 **Status:** Pending Approval to Proceed
-**Authors:** Thanmai Boddoju (IBM Infrastructure, India), Anubhav Jana (IBM Research, India)
+**Authors:** Thanmai Boddoju, Anubhav Jana
 
 ---
 
@@ -37,12 +37,8 @@ Develop a self-contained, browser-based dashboard with advanced analytics and vi
 
 ### 1. Multi-Tab Interface
 - **Summary Tab**: High-level overview with pie chart, top failures, and model pass rates
-- **Test Coverage Explorer Tab**: Paginated tables (10-100 items/page) with advanced grouping and filtering by:
-  - Model tag
-  - Test method
-  - Test class
-  - Operation (op)
-  - Data type (dtype)
+- **Test Details Tab**: Paginated table (10-100 items/page) with filtering and search
+- **Coverage Explorer Tab**: Advanced grouping by model/test/op/dtype/class
 
 ### 2. Data Visualization
 - Interactive pie/doughnut charts (Chart.js)
@@ -58,10 +54,9 @@ Develop a self-contained, browser-based dashboard with advanced analytics and vi
 
 ### 4. Technical Specifications
 - Single HTML file (self-contained)
-- No server/backend required - can be directly integrated with GitHub Actions
-- Client-side XML parsing (works entirely in the browser)
+- No server/backend required
+- Client-side XML parsing
 - Responsive design with IBM Plex fonts
-- Straightforward deployment: commit to repository and include in CI/CD artifacts alongside test reports
 
 ### 5. Future Enhancements (To Be Evaluated During Implementation)
 Additional features may be incorporated based on:
@@ -96,6 +91,7 @@ Additional features may be incorporated based on:
 - Can be developed and tested independently
 - Can run alongside existing tools during transition
 
+
 ---
 
 ## Implementation Plan
@@ -112,6 +108,8 @@ Additional features may be incorporated based on:
 - Add additional features as identified
 - Integrate with the CI/CD pipeline
 - QA team validation
+
+
 
 ---
 
