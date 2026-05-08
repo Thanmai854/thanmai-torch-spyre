@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_fxir_backend.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - AOTFxirTestCase::test_aoti_fx_linear
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

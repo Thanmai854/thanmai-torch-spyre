@@ -1,0 +1,37 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_flex_attention.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFlexAttention::test_custom_score_mod_layout_freeze
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              - 18
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

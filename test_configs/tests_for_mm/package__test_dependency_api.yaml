@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/package/test_dependency_api.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestDependencyAPI::test_extern
+      mode: mandatory_success
+      tags:
+      - package
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

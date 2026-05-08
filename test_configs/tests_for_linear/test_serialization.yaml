@@ -1,0 +1,201 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_serialization.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestSerialization::test_storage_alignment
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSerialization::test_mmap_load_offset_calculation
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSerialization::test_corrupted_checkpoint_error_message
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSerialization::test_has_format_version
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSerialization::test_crc32_options
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSerialization::test_serialization_zipfile_actually_jit
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSerialization::test_filewriter_metadata_writing
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSerialization::test_serialization_mmap_loading
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - SerializationMixin::test_serialization_save_warnings
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - SerializationMixin::test_map_location_meta_skips_storage_read
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSerialization::test_serialization_4gb_file
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,48 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/export/test_export.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestExport::test_unbacked_3d_matmul
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExport::test_split_const_gm_with_lifted_constants
+      mode: mandatory_success
+      tags:
+      - export
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

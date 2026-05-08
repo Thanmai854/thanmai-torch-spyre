@@ -1,0 +1,26 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_cutlass_backend.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCutlassBackend::test_cutlass_backend_fp8_scaled_mm_fast_accum_filtering
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

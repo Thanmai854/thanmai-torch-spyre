@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/nn/test_pruning.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestPruningNN::test_custom_from_mask_pruning
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

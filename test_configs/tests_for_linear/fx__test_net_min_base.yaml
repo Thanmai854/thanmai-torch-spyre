@@ -1,0 +1,57 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/fx/test_net_min_base.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestNetMinBaseBlock::test_all_nodes_discrepancy
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNetMinBaseBlock::test_first_node_discrepancy
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNetMinBaseBlock::test_middle_node_discrepancy
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNetMinBaseBlock::test_contiguous_partial_discrepancy_end
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNetMinBaseBlock::test_continugous_partial_discrepancy_beginning
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

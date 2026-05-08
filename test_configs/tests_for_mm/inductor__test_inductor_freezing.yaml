@@ -1,0 +1,47 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_inductor_freezing.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - OptimizeForInferenceTemplate::test_mm_concat
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - OptimizeForInferenceTemplate::test_unequal_bias_horizontal_addmm_fusion
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

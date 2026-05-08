@@ -1,0 +1,39 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/custom_operator/test_infer_schema_annotation.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestInferSchemaWithAnnotation::test_torch_types
+      mode: mandatory_success
+      tags:
+      - custom_operator
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestInferSchemaWithAnnotation::test_type_variants
+      mode: mandatory_success
+      tags:
+      - custom_operator
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestInferSchemaWithAnnotation::test_no_library_prefix
+      mode: mandatory_success
+      tags:
+      - custom_operator
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

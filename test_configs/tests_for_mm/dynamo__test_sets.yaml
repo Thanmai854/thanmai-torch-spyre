@@ -1,0 +1,74 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/dynamo/test_sets.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - _FrozensetBase::test_symmetric_difference
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - OrderedSetTests::test_symmetric_difference_maintains_order
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - _SetBase::test_symmetric_difference_update
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - MiscTests::test_isdisjoint_with_generator
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - _FrozensetBase::test_binop_xor
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - OrderedSetTests::test_binop_preserves_type
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

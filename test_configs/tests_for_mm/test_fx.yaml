@@ -1,0 +1,74 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_fx.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFX::test_immutable_list_pytree_ops
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_immutable_dict_pytree_ops
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_copy_it
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestFX::test_no_mutation
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

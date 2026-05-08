@@ -1,0 +1,84 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/jit/test_save_load.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestSaveLoad::test_many_collisions
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSaveLoad::test_save_load_meta_tensors_to_device
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSaveLoadFlatbuffer::test_many_collisions
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSaveLoadFlatbuffer::test_module_info_flatbuffer
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

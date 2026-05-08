@@ -1,0 +1,32 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_cpp_extensions_aot.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCppExtensionAOT::test_extension_function
+      mode: mandatory_success
+      tags:
+      - cpp_extensions_aot
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

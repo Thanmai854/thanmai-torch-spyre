@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_decompose_mem_bound_mm.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestDecomposeMemMM::test_decompose_bmm_cpu
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

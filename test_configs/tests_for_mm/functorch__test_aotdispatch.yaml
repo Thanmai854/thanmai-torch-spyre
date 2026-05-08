@@ -1,0 +1,56 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/functorch/test_aotdispatch.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestAOTExport::test_aot_export_multiple_outputs_require_grad_banned
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestAOTExport::test_aot_export_predispatch_func_composite_implicit
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestAOTAutogradWithCache::test_input_mutation_false_aliasing
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

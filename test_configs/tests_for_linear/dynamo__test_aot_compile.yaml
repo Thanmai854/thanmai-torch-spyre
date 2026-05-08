@@ -1,0 +1,48 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/dynamo/test_aot_compile.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestAOTCompile::test_aot_module_simplified_serializable_autograd
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestAOTCompile::test_aot_compile_with_captured_module_2
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

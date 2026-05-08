@@ -1,0 +1,102 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_jit.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestScript::test_module_parameters_and_buffers
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestScript::test_remove_dropout
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestScript::test_script_module_nochange_submodule
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestJit::test_dropout_module_requires_grad
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestJit::test_Sequential
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 20
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestScript::test_inlining_cleanup
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

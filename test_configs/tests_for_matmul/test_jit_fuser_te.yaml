@@ -1,0 +1,44 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_jit_fuser_te.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestTEFuser::test_matmul
+      mode: mandatory_success
+      tags:
+      - jit_fuser_te
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestTEFuser::test_lstm_gates_permutations
+      mode: mandatory_success
+      tags:
+      - jit_fuser_te
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,85 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/quantization/eager/test_equalize_eager.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestEqualizeEager::test_equalize_fused_linearrelu
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 20
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestEqualizeEager::test_cross_layer_equalization
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestEqualizeEager::test_converged
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestEqualizeEager::test_equalize
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 20
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

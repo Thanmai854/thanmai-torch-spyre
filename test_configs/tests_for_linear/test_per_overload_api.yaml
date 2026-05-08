@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_per_overload_api.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestPerOverloadAPI::test_decompose
+      mode: mandatory_success
+      tags:
+      - per_overload_api
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

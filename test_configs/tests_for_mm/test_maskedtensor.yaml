@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_maskedtensor.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestReductions::test_sum
+      mode: mandatory_success
+      tags:
+      - maskedtensor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

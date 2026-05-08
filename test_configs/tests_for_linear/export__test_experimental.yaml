@@ -1,0 +1,146 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/export/test_experimental.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestExperiment::test_joint_basic
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExperiment::test_export_with_default_kwargs
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExperiment::test_joint_buffer_input_mutations
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestExperiment::test_sticky_export
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExperiment::test_sticky_export_dynamic
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExperiment::test_sticky_export_nested_inp
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExperiment::test_restore_state_dict_basic
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExperiment::test_restore_state_dict_with_bound_method
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

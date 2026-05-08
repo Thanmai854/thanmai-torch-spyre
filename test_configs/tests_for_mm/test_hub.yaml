@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_hub.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestHub::test_load_commit_from_forked_repo
+      mode: mandatory_success
+      tags:
+      - hub
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestHub::test_load_legacy_zip_checkpoint
+      mode: mandatory_success
+      tags:
+      - hub
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

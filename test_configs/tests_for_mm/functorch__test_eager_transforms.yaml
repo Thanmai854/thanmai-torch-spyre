@@ -1,0 +1,46 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/functorch/test_eager_transforms.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestJvp::test_zerotensor_vmapjvp_interaction
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestHigherOrderOperatorInteraction::test_grad_grad_sum
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

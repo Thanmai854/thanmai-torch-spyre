@@ -1,0 +1,165 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_b2b_gemm.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - B2BGEMMTest::test_b2b_gemm_good_pattern_bad_shape
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 100
+              - 100
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - B2BGEMMTest::test_b2b_gemm_bad_pattern_good_shape
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 256
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - B2BGEMMTest::test_b2b_gemm_trivial_right_assoc_good_shape
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 256
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - B2BGEMMTest::test_b2b_gemm_trivial_left_assoc_good_shape
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 256
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - B2BGEMMTest::test_b2b_gemm_right_assoc_good_shape
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 256
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - B2BGEMMTest::test_b2b_gemm_left_assoc_good_shape
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 256
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - B2BGEMMTest::test_gelu_b2b_gemm_performance
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - B2BGEMMTest::test_plain_b2b_gemm_performance
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - B2BGEMMTest::test_gelu_mlp_b2b_gemm_performance
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

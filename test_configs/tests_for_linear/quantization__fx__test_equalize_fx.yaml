@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/quantization/fx/test_equalize_fx.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestEqualizeFx::test_input_weight_equalization_prepare
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestEqualizeFx::test_selective_equalization
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,26 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_matmul_cuda.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestMixedDtypesLinearCuda::test_mixed_dtypes_linear
+      mode: xfail
+      tags:
+      - matmul_cuda
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

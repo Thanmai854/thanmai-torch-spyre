@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_aot_inductor.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - AOTInductorTestsTemplate::test_triton_autotuning
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1024
+              - 2048
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

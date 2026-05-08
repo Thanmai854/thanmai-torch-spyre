@@ -1,0 +1,364 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/quantization/jit/test_quantize_jit.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestQuantizeJitPasses::test_swap_functional_linear
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeJitOps::test_linear
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 30
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeJitOps::test_cat_linear
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeDynamicJitPasses::test_insert_quant_dequant_linear_dynamic
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeDynamicJitOps::test_linear
+      mode: mandatory_success
+      tags:
+      - quantization
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeJit::test_single_linear
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestQuantizeJit::test_single_linear_dynamic
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestQuantizeJit::test_linear_dynamic_fp16
+      mode: mandatory_success
+      tags:
+      - quantization
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeJitPasses::test_finalize_for_linear
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeJitPasses::test_fuse_linear
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeJitPasses::test_insert_observers_child_qconfig
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeJitPasses::test_module_list
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeDynamicJitPasses::test_prepare_dynamic
+      mode: mandatory_success
+      tags:
+      - quantization
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeDynamicJitPasses::test_prepare_dynamic_child_qconfig
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeDynamicJitPasses::test_dynamic_multi_op
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeDynamicJitPasses::test_dynamic_quant_multi_uses
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeDynamicJitPasses::test_dynamic_shared_weights
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeDynamicJitPasses::test_dynamic_weight_observer
+      mode: mandatory_success
+      tags:
+      - quantization
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeDynamicJitPasses::test_convert_dynamic_fp16
+      mode: mandatory_success
+      tags:
+      - quantization
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeDynamicJitPasses::test_quantize_dynamic_fp16
+      mode: mandatory_success
+      tags:
+      - quantization
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

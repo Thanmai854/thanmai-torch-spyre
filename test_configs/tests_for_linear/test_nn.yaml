@@ -1,0 +1,873 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_nn.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestNN::test_RNN_nonlinearity
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 20
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_RNN_nonlinearity_passed_as_arg
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 20
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_linear_raise_on_scalar_input
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_upsamplingTrilinear3d_spatial_invariance
+      mode: mandatory_success
+      tags:
+      - nn
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 9
+              - 9
+              - 9
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_bilinear
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_bilinear_broadcasting
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_upsamplingBilinear2d_spatial_invariance
+      mode: mandatory_success
+      tags:
+      - nn
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 9
+              - 9
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_upsamplingLinear1d_spatial_invariance
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 9
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_bilinear_value_error
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              - 9
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNNDeviceType::test_linear_empty
+      mode: xfail
+      tags:
+      - nn
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - TestNNDeviceType::test_nonlinearity_propagate_nan
+      mode: xfail
+      tags:
+      - nn
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestNNDeviceType::test_upsamplingBilinear2d_aa_correctness
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestFusionUtils::test_fuse_linear_bn_requires_grad
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_linear_broadcasting
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_pickle_module_no_weights_only_warning
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestAddRelu::test_add_relu
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 7
+              - 11
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNNDeviceType::test_skip_init
+      mode: xfail
+      tags:
+      - nn
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_module_backcompat
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_buffer_bad_module_subclass
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_children
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_Sequential_pop
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_spectral_norm_load_state_dict
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_weight_norm_pickle
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 7
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_weight_norm
+      mode: mandatory_success
+      tags:
+      - nn
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_vector_to_parameters
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestNN::test_parameters_to_vector
+      mode: mandatory_success
+      tags:
+      - nn
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 10
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_Sequential_extend
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 20
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_Sequential_insert_fail_case
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_Sequential_insert
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_container_copy
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_upsampling_small_scale
+      mode: mandatory_success
+      tags:
+      - nn
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_RNN_cell_forward_zero_hidden_size
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNN::test_parameter_assignment
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_state_dict
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNN::test_spectral_norm_pickle
+      mode: mandatory_success
+      tags:
+      - nn
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 7
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_spectral_norm_forward
+      mode: mandatory_success
+      tags:
+      - nn
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_Sequential_append
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 20
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_Sequential_imul
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 20
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_Sequential_setitem_named
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 20
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_named_modules
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_modules
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_named_children
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_dir_digit
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_repr
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_dir
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_Sequential_delitem
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNN::test_Sequential_rmul
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 20
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNN::test_Sequential_mul
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNN::test_Sequential_iadd
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNN::test_Sequential_add
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

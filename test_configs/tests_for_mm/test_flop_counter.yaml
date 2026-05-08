@@ -1,0 +1,100 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_flop_counter.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFlopCounter::test_addmm_out
+      mode: mandatory_success
+      tags:
+      - flop_counter
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFlopCounter::test_flop_counter_custom_triton_op_two_kernels_auto_ac
+      mode: mandatory_success
+      tags:
+      - flop_counter
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestFlopCounter::test_op
+      mode: mandatory_success
+      tags:
+      - flop_counter
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFlopCounter::test_flop_counter_variety
+      mode: mandatory_success
+      tags:
+      - flop_counter
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFlopCounter::test_inference_mode
+      mode: mandatory_success
+      tags:
+      - flop_counter
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 3
+              - 224
+              - 224
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

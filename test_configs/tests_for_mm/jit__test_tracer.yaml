@@ -1,0 +1,65 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/jit/test_tracer.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestMixTracingScripting::test_call_tracing_fn_from_script_module
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestTracer::test_trace_out_operator_with_two_output
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestTracer::test_trace_annotation
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

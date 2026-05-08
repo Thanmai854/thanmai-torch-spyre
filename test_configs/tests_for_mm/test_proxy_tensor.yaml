@@ -1,0 +1,48 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_proxy_tensor.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestGenericProxyTensor::test_partial_decomp
+      mode: mandatory_success
+      tags:
+      - proxy_tensor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestGenericProxyTensor::test_isolated_graphmodule
+      mode: mandatory_success
+      tags:
+      - proxy_tensor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

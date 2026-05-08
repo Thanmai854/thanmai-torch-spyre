@@ -1,0 +1,48 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_multi_kernel.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - MultiKernelTest::test_triton_gemm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4096
+              - 4096
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - MultiKernelTest::test_triton_relu_fused_gemm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4096
+              - 4096
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

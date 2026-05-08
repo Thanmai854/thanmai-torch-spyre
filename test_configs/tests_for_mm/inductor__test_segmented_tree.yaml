@@ -1,0 +1,39 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_segmented_tree.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestSegmentedTree::test_boundary_conditions
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestSegmentedTree::test_invalid_ranges
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestSegmentedTree::test_out_of_bounds
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

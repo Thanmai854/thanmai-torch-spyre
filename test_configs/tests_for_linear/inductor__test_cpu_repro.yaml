@@ -1,0 +1,168 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_cpu_repro.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - CPUReproTests::test_linear_with_reshape
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CPUReproTests::test_linear_with_no_default_contiguous_input
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 16
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CPUReproTests::test_linear_buffer_reuse
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CPUReproTests::test_linear_packed
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - CPUReproTests::test_linear_used_from_multiple_places
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 224
+              - 224
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CPUReproTests::test_mkl_linear
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CPUReproTests::test_inplace_squeeze_needed
+      mode: mandatory_success
+      tags:
+      - inductor
+      - layer_norm
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CPUReproTests::test_upsample_layout
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 64
+              - 64
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops:
+    - name: layer_norm
+      dtypes:
+      - name: float16
+        precision:
+          atol: 0.001
+          rtol: 0.001

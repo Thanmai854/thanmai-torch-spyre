@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_file_check.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFileCheck::test_all_python_api
+      mode: mandatory_success
+      tags:
+      - file_check
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

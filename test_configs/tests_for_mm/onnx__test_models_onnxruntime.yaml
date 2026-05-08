@@ -1,0 +1,31 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/onnx/test_models_onnxruntime.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestModelsONNXRuntime::test_keypoint_rcnn
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 100
+              - 100
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

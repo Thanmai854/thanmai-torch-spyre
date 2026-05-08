@@ -1,0 +1,219 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/ao/sparsity/test_sparsifier.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestBaseSparsifier::test_mask_squash_with_params3
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestBaseSparsifier::test_step
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestBaseSparsifier::test_convert
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestBaseSparsifier::test_mask_squash
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestBaseSparsifier::test_mask_squash_with_params1
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestBaseSparsifier::test_mask_squash_with_params2
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestWeightNormSparsifier::test_constructor
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNearlyDiagonalSparsifier::test_sparsity_levels
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestWeightNormSparsifier::test_step
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestWeightNormSparsifier::test_step_2_of_4
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestWeightNormSparsifier::test_prepare
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestWeightNormSparsifier::test_mask_squash
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 12
+              - 12
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestWeightNormSparsifier::test_sparsity_levels
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 12
+              - 12
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNearlyDiagonalSparsifier::test_constructor
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestNearlyDiagonalSparsifier::test_step
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNearlyDiagonalSparsifier::test_prepare
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNearlyDiagonalSparsifier::test_mask_squash
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

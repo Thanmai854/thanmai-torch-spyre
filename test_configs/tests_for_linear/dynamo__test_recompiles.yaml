@@ -1,0 +1,47 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/dynamo/test_recompiles.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - RecompileTests::test_simple_module_recompile
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - RecompileTests::test_inline_inbuilt_nn_modules_candidate
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

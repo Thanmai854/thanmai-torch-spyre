@@ -1,0 +1,32 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/dynamo/test_unspec.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - UnspecTests::test_sum_dimlist_spec
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 5
+              - 24
+              - 24
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

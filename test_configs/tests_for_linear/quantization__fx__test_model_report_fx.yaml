@@ -1,0 +1,60 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/quantization/fx/test_model_report_fx.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFxModelReportDetectDynamicStatic::test_nested_detection_case
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestFxModelReportObserver::test_zero_tensor_errors
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 1
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFxModelReportDetector::test_multiple_q_config_options
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 3
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

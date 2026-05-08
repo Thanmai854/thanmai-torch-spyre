@@ -1,0 +1,29 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/profiler/test_profiler_tree.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestProfilerTree::test_profiler_experimental_tree_with_stack_and_modules
+      mode: mandatory_success
+      tags:
+      - profiler
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

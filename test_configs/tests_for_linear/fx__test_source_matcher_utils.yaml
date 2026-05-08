@@ -1,0 +1,120 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/fx/test_source_matcher_utils.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestSourceMatcher::test_module_partitioner_linear_relu_linear_nn_module_stack
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSourceMatcher::test_module_partitioner_functional_linear_relu_linear_torch_fn_export
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSourceMatcher::test_module_partitioner_linear_relu_linear_torch_fn_export
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSourceMatcher::test_module_partitioner_functional_linear_relu_linear
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSourceMatcher::test_module_partitioner_linear_relu_linear
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSourceMatcher::test_module_partitioner_weight_tied
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

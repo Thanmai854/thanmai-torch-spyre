@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_legacy_vmap.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestVmapAPILegacy::test_nn_module
+      mode: mandatory_success
+      tags:
+      - legacy_vmap
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

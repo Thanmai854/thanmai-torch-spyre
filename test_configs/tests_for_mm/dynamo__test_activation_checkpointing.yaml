@@ -1,0 +1,83 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/dynamo/test_activation_checkpointing.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - ActivationCheckpointingViaTagsTests::test_compile_selective_checkpoint_must_not_recompute_gemm
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - ActivationCheckpointingViaTagsTests::test_compile_selective_checkpoint_must_not_recompute_gemm_no_functionalization
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - ActivationCheckpointingViaTagsTests::test_compile_selective_checkpoint_must_recompute
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - RematerializeACNodesPassTests::test_ac_rematerialize_with_selective_checkpoint_policy
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

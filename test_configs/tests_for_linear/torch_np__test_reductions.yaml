@@ -1,0 +1,29 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/torch_np/test_reductions.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestSum::test_sum_complex_1
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,66 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/onnx/test_pytorch_onnx_onnxruntime.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestONNXRuntime::test_matmul
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestONNXRuntime::test_matmul_batch
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestONNXRuntime::test_scalar_type
+      mode: mandatory_success
+      tags:
+      - onnx
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

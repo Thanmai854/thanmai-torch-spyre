@@ -1,0 +1,156 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_pad_mm.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - PadMMTest::test_pad_addmm_2d_bias
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - PadMMTest::test_pad_addmm_dyn_mn
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - PadMMTest::test_pad_addmm_dyn_m
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - PadMMTest::test_pad_bmm_dyn_bm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - PadMMTest::test_pad_bmm_dyn_k
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - PadMMTest::test_pad_bmm_dyn_b
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - PadMMTest::test_pad_mm_dyn_mnk
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - PadMMTest::test_pad_mm_dyn_k
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - PadMMTest::test_pad_mm_dyn_n
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - PadMMTest::test_pad_mm_dyn_m
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - PadMMTest::test_cat_pad_mm_dyn_m
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - PadMMTest::test_original_aten_preserved_pad_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - PadMMTest::test_zero_dim
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - PadMMTest::test_pad_batch
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

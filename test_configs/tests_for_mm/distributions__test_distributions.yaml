@@ -1,0 +1,161 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/distributions/test_distributions.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestDistributions::test_gamma_shape
+      mode: mandatory_success
+      tags:
+      - distributions
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestDistributionShapes::test_gamma_shape_scalar_params
+      mode: mandatory_success
+      tags:
+      - distributions
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestDistributions::test_gamma_log_prob_at_boundary
+      mode: mandatory_success
+      tags:
+      - distributions
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestDistributions::test_gamma_gpu_sample
+      mode: mandatory_success
+      tags:
+      - distributions
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestDistributions::test_gamma_sample
+      mode: mandatory_success
+      tags:
+      - distributions
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestDistributions::test_gamma_gpu_shape
+      mode: mandatory_success
+      tags:
+      - distributions
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestDistributions::test_inversegamma_sample
+      mode: mandatory_success
+      tags:
+      - distributions
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestDistributionShapes::test_gamma_shape_tensor_params
+      mode: mandatory_success
+      tags:
+      - distributions
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestDistributions::test_wishart_stable_with_precision_matrix
+      mode: mandatory_success
+      tags:
+      - distributions
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestDistributions::test_valid_parameter_broadcasting
+      mode: mandatory_success
+      tags:
+      - distributions
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

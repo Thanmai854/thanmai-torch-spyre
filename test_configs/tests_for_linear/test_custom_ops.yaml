@@ -1,0 +1,29 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_custom_ops.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCustomOpAPI::test_compile
+      mode: mandatory_success
+      tags:
+      - custom_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

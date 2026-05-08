@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/cpp_extensions/open_registration_extension/torch_openreg/tests/test_rng.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestRNG::test_rng_state
+      mode: mandatory_success
+      tags:
+      - cpp_extensions
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

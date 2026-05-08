@@ -1,0 +1,75 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/nn/test_load_state_dict.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestLoadStateDict::test_load_state_dict_invalid
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestLoadStateDict::test_load_state_dict_child
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestLoadStateDict::test_load_state_dict_assign_shape_stride
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestLoadStateDict::test_load_state_dict_warn_assign
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

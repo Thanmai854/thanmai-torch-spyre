@@ -1,0 +1,190 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_native_matmul.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestTritonDotReduction::test_bmm_no_z_broadcast
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 16
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestTritonDotReduction::test_bmm_horizontal_fusion
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 16
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestTritonDotReduction::test_3mm_add
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestTritonDotReduction::test_bmm_vertical_fusion
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 16
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestTritonDotReduction::test_mm_complex
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestTritonDotReduction::test_mm_1d_expand
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestTritonDotReduction::test_mm_2_expand
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestTritonDotReduction::test_bmm_large_batch_reversed_pid
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 65537
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestTritonDotReduction::test_bmm_fusion_complex2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestTritonDotReduction::test_bmm_fusion_complex1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestTritonDotReduction::test_batchmatmul
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 256
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

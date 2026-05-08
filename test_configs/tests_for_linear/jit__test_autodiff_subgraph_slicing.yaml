@@ -1,0 +1,48 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/jit/test_autodiff_subgraph_slicing.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestAutodiffSubgraphSlicing::test_bias_as_module_attr
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestAutodiffSubgraphSlicing::test_constructed_bias
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestAutodiffSubgraphSlicing::test_bias_as_arg
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

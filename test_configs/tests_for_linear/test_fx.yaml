@@ -1,0 +1,280 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_fx.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFX::test_interpreter_partial_eval
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestFX::test_transformer_noop
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_transformer_multi_outputs
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_custom_traceback_raised_when_exception_source_is_graphmodule
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_custom_traceback_not_raised_when_exception_source_is_submodule
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_submodule_manipulation_API
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_interpreter_other_graph
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_interpreter
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_example_shape_prop
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_construct_root_dict
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_trace_buffer_slice
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestFX::test_tensor_attribute
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_tensor_constant
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_pickle_graphmodule
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_pretty_print_node
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFX::test_graph_fns
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

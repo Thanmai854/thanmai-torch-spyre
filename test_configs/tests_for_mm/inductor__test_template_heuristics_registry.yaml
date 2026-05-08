@@ -1,0 +1,48 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_template_heuristics_registry.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestTemplateHeuristicsRegistry::test_register_class
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestTemplateHeuristicsRegistry::test_partial_hierarchy_scenarios
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestBlackwellGPUGemmConfig::test_custom_values
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestBlackwellGPUGemmConfig::test_default_values
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

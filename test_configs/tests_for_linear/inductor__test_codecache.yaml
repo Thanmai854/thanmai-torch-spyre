@@ -1,0 +1,84 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_codecache.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestStandaloneCompile::test_basic
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestStandaloneCompile::test_is_saveable
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestStandaloneCompile::test_save_in_new_path
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFxGraphCacheHashing::test_non_serializable_custom_passes_causes_cache_miss
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

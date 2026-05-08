@@ -1,0 +1,634 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_aot_inductor.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - AOTInductorTestsTemplate::test_linear_dynamic_maxautotune
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_linear_freezing
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_using_model_name_for_files
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_libtorch_free_so
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_with_cudagraphs
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_update_user_managed_buffer
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_addmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_inf
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_nan
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_addmm_multiple_dynamic
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_aoti_constant_tensor
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_cond_with_replace_view_ops
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_non_default_gpu_device
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_load_package_multiple_gpus
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_with_profiler
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_zero_size_weight
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_model_modified_weights
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_misc_1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_torchvision_transforms_functional_tensor_resize
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 800
+              - 600
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_aoti_debug_printer_codegen
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_aoti_profiler
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_so_without_weight
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - AOTInductorTestsTemplate::test_weight_on_disk_legacy
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_extract_constants_map
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_update_constant_buffer
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_update_inactive_constant_buffer
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_free_inactive_buffer
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_amp_fallback_random
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_freezing
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_with_offset
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_large_mmaped_weights_on_disk
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 250112
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_simple
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_simple_multi_arch
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_small_constant
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_output_path_1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_output_path_2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_empty_constant_folding
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_constant_folding_with_update
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_large_weight
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2048
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_large_mmaped_weights
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 250112
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

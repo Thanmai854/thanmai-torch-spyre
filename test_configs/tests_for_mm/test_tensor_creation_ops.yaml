@@ -1,0 +1,43 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_tensor_creation_ops.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestBufferProtocol::test_non_writable_buffer
+      mode: mandatory_success
+      tags:
+      - tensor_creation_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestTensorCreation::test_signal_windows_functions
+      mode: xfail
+      tags:
+      - tensor_creation_ops
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,446 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_cutlass_backend.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCutlassBackend::test_cutlass_backend_subproc_addmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestCutlassBackend::test_cutlass_backend_subproc_bmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestCutlassBackend::test_max_autotune_cutlass_backend_fp8_scaled_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestCutlassBackend::test_max_autotune_cutlass_backend_addmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestCutlassBackend::test_max_autotune_cutlass_backend_bmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestCutlassBackend::test_max_autotune_cutlass_backend_regular_mm_streamk
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestCutlassBackend::test_cutlass_backend_fp8_scaled_mm_fast_accum_filtering
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestCutlassBackend::test_multiple_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCutlassBackend::test_gemm_operation_serialization
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestCutlassBackend::test_cutlass_backend_subproc_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestCutlassBackend::test_number_mm_precompiles
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCutlassBackend::test_max_autotune_cutlass_backend_regular_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestCutlassBackend::test_cutlass_backend_fp8_scaled_mm_mixed_dtypes
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestCutlassBackend::test_max_autotune_cutlass_backend_sparse_semi_structured_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - TestCutlassBackend::test_cutlass_backend_shape_coverage_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 125
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCutlassBackend::test_multiple_mm_with_dynamic_shape
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 256
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCutlassBackend::test_max_autotune_cutlass_threshold
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 100
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCutlassBackend::test_streamk_with_dynamic
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCutlassBackend::test_streamk_with_static
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestCutlassBackend::test_max_autotune_cutlass_backend_relu_fusion_fp16_fp32acc
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestCutlassBackend::test_max_autotune_cutlass_backend_shape_dependent_normalization_fusion
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 100
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCutlassBackend::test_cutlass_backend_op_denylist
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCutlassBackend::test_standalone_runner
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCutlassBackend::test_cutlass_backend_op_allowlist
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCutlassBackend::test_cutlass_backend_matmul_same_tensor
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestCutlassBackend::test_evt_flexible_layout
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestCutlassBackend::test_fp8_tensorwise_scaling
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 512
+              - 128
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCutlassBackend::test_config_number_post_filtering
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

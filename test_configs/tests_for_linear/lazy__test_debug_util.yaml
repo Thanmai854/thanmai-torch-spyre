@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/lazy/test_debug_util.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - DebugUtilTest::test_get_python_frames
+      mode: mandatory_success
+      tags:
+      - lazy
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

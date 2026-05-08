@@ -1,0 +1,209 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/fx/test_cse_pass.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCSEPass::test_immutable_list_type
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCSEPass::test_immutable_list_multiple_entries
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCSEPass::test_nested_immutable_list_type
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCSEPass::test_nochange
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCSEPass::test_simple
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCSEPass::test_simple_2
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCSEPass::test_two_args_default
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCSEPass::test_simple_multiple_same_ops
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCSEPass::test_banned_list
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCSEPass::test_rand_like
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCSEPass::test_rand_n
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

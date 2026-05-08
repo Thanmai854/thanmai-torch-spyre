@@ -1,0 +1,31 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/cpp_extensions/test_libtorch_agnostic.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestLibtorchAgnostic::test_my_matmul
+      mode: mandatory_success
+      tags:
+      - cpp_extensions
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

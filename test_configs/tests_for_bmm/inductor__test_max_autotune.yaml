@@ -1,0 +1,112 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_max_autotune.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestMaxAutotune::test_bmm_out_dtype
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestMaxAutotune::test_triton_template_generated_code_caching_bmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              - 22
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestMaxAutotune::test_autotune_gemm_choice_validation
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestMaxAutotune::test_fixed_layout_at_lowering
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1490
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestMaxAutotune::test_baddmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 64
+              - 1
+              - 192
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

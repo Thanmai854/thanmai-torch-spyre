@@ -1,0 +1,32 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/jit/test_device_analysis.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestDeviceAnalysis::test_mobilenet
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 3
+              - 224
+              - 224
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

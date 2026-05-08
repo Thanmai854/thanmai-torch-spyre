@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_fx_experimental.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFXExperimental::test_merge_matmuls
+      mode: mandatory_success
+      tags:
+      - fx_experimental
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

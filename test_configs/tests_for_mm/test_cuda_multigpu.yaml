@@ -1,0 +1,48 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_cuda_multigpu.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCudaMultiGPU::test_streams_multi_gpu_query
+      mode: mandatory_success
+      tags:
+      - cuda_multigpu
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestCudaComm::test_broadcast_coalesced
+      mode: mandatory_success
+      tags:
+      - cuda_multigpu
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestCudaComm::test_reduce_add
+      mode: mandatory_success
+      tags:
+      - cuda_multigpu
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

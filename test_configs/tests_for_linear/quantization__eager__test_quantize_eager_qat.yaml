@@ -1,0 +1,119 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/quantization/eager/test_quantize_eager_qat.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestQuantizeEagerQATNumerics::test_linear_bn_workflow
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeEagerQATNumerics::test_linear_precomputed_fake_quant
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeEagerQATNumerics::test_linear_bn_numerics
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestQuantizeEagerQAT::test_embedding_bag_linear
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestQuantizeEagerQAT::test_defused_embedding_bag_linear
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestQuantizeEagerQAT::test_dynamic_qat_linear
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestQuantizeEagerQAT::test_conv_linear
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestQuantizeEagerQAT::test_eval_only_fake_quant
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestQuantizeEagerQAT::test_embedding_qat_qconfig_equal
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

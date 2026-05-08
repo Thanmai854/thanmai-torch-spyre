@@ -1,0 +1,65 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_benchmark_fusion.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - BenchmarkFusionTestTemplate::test_softmax
+      mode: mandatory_success
+      tags:
+      - inductor
+      - softmax
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 8192
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - BenchmarkFusionTestTemplate::test_resnet18
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - BenchmarkFusionTestTemplate::test_foreach_kernel
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1024
+              - 256
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops:
+    - name: softmax
+      dtypes:
+      - name: float16
+        precision:
+          atol: 0.001
+          rtol: 0.001

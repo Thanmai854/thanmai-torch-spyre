@@ -1,0 +1,2744 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_torchinductor.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - CommonTemplate::test_lgamma
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_cummin
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - CommonTemplate::test_baddbmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 6
+              - 1
+              - 100
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_mm_views
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 32
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_addmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_mm_mixed_dtype
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 6
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_special_polygamma
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_flexible_layout_immutable_free_symbols
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_bmm2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_bmm1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 16
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_index3
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - CommonTemplate::test_bitwise2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - CommonTemplate::test_inf
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_zeros
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 8
+              - 64
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_new_ones
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_full_like
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_full_like_sliced
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_upsample_nearest1d
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              - 37
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_signbit
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              - 6
+              - 6
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_upsample_nearest2d_neg
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              - 37
+              - 38
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_upsample_bilinear2d_b
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              - 40
+              - 59
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_sort
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_topk
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_constant_pad_2d
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_constant_pad_2d_strides_nonpositive
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_constant_pad_3d
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_single_elem_indirect
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - CommonTemplate::test_logsumexp
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_flip
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              - 6
+              - 6
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_gelu
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_repeat_interleave_2
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              - 6
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_embedding
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_var_mean_div_by
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 17
+              - 2048
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_embedding_bag
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_matmul_layer_norm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - layer_norm
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - CommonTemplate::test_transpose_add
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_uniform
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_leaky_relu
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_masked_fill
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - CommonTemplate::test_rsqrt
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_masked_scatter
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - CommonTemplate::test_pow1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_glu
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 16
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_cat_negative_dim
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - CommonTemplate::test_stack
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_hardtanh
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_hardsigmoid
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_hardswish
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_slice_mutation1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_index_put2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - CommonTemplate::test_bucketize_nan_consistency
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_zero_element_mutation
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - CommonTemplate::test_pixel_shuffle_channels_last
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 16
+              - 64
+              - 72
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_where_with_logical_op
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_conv_with_as_strided
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 256
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_const_int32_to_float
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_pad_single
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_bucketize_computed_offsets
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_assert_alignment_op_name_pass
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_vdd_clamp
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_pattern_matcher_multi_user
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 512
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_sizehint_issue1
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - CommonTemplate::test_argmax_argmin3
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_index_put3
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1024
+              - 1
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_slice_scatter4
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_index_put4
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_index_put_fallback1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_index_put_index
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_narrow
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 64
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_as_strided_scatter
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 1024
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_select_scatter
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 197
+              - 38
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_slice_scatter2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 197
+              - 384
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_slice_scatter3
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_scatter_add2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_scatter_reduce1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_scatter_reduce3
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_empty1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_new_empty
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_new_empty_strided
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 55
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_dropout_trivial_0
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 55
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_dropout_trivial_1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 55
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_sin
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_cos
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_tanh
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_add_const_float
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_add_complex
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - CommonTemplate::test_abs
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 17
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_sgn
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - CommonTemplate::test_sgn_extremal
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - CommonTemplate::test_max_min
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_horizonal_fusion1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 16
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_horizonal_fusion2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_index_remainder
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1024
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test__unsafe_masked_index
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 9
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test__unsafe_masked_index_put_accumulate
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_sum1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_sum2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 9
+              - 3
+              - 21
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_sum4
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 16
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_sum5
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 17
+              - 8
+              - 9
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_multilayer_prime_size
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3999971
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_split_cumsum_low_prec
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 3
+              - 352
+              - 352
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_split_cumprod_low_prec
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - CommonTemplate::test_custom_scan_op_multi_input
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 100
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_expanded_reduction
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 1
+              - 256
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_fmin_fmax
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_sum_int
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_clamp
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_dist
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_clamp_type_promotion_non_tensor
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_norm_constant_overflow
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 1
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_squeeze1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              - 1
+              - 2
+              - 2
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_linear1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_scalar_input
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_slice1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 20
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_slice4
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_max_unpool_empty_output
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_conv1d_depthwise
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 768
+              - 512
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_convolution4
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              - 16
+              - 20
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_conv3d
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 3
+              - 8
+              - 16
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_fractional_max_pool2d3
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_max_pool2d1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_max_pool2d2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 64
+              - 55
+              - 55
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_max_pool2d3
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_max_pool2d4
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 8
+              - 111
+              - 111
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_max_pool2d5
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 64
+              - 55
+              - 55
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_max_pool2d7
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 6
+              - 7
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_max_pool2d8
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              - 3
+              - 6
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_avg_pool2d1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_avg_pool2d2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 64
+              - 55
+              - 55
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_avg_pool2d4
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 8
+              - 111
+              - 111
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_avg_pool2d5
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_avg_pool2d6
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_avg_pool2d8
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 3
+              - 6
+              - 6
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_elu
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_unsqueeze
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_permute2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_arange2
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_transpose
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_linspace1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 7
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_linspace2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_linspace3
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_linspace4
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_tensor1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_tensor2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_tensor3
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_views1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_views2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - CommonTemplate::test_views3
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_views4
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_views7
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_view_copy_dtype_change
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_relu
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_exp
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_sigmoid
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_div1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_div2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_div6
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_floordiv
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CommonTemplate::test_div_by_zero
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_both_scalars
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - CommonTemplate::test_softmax
+      mode: mandatory_success
+      tags:
+      - inductor
+      - softmax
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops:
+    - name: layer_norm
+      dtypes:
+      - name: float16
+        precision:
+          atol: 0.001
+          rtol: 0.001
+    - name: softmax
+      dtypes:
+      - name: float16
+        precision:
+          atol: 0.001
+          rtol: 0.001

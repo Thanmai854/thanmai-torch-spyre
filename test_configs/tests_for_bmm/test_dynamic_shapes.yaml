@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_dynamic_shapes.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestPySymInt::test_baddbmm_symint
+      mode: mandatory_success
+      tags:
+      - dynamic_shapes
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,174 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/torch_np/numpy_tests/lib/test_function_base.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestPercentile::test_linear_nan_1D
+      mode: mandatory_success
+      tags:
+      - torch_np
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - TestPercentile::test_linear_interpolation_extrapolation
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPercentile::test_linear_interpolation
+      mode: mandatory_success
+      tags:
+      - torch_np
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - TestPercentile::test_sequence
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestVectorize::test_large
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestDigitize::test_random
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestDigitize::test_right_open_random
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSinc::test_simple
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestInterp::test_basic
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestInterp::test_scalar_interpolation_point
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestInterp::test_non_finite_behavior_exact_x
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestInterp::test_non_finite_inf
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestInterp::test_complex_interp
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestInterp::test_if_len_x_is_small
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

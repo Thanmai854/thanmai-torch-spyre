@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/export/test_torchbind.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestExportTorchbind::test_non_strict_export_methods
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

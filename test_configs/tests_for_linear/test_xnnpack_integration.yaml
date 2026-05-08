@@ -1,0 +1,75 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_xnnpack_integration.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestXNNPACKOps::test_linear
+      mode: mandatory_success
+      tags:
+      - xnnpack_integration
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestXNNPACKOps::test_linear_1d_input
+      mode: mandatory_success
+      tags:
+      - xnnpack_integration
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestXNNPACKSerDes::test_linear
+      mode: mandatory_success
+      tags:
+      - xnnpack_integration
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestXNNPACKRewritePass::test_linear
+      mode: mandatory_success
+      tags:
+      - xnnpack_integration
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestXNNPACKRewritePass::test_decomposed_linear
+      mode: mandatory_success
+      tags:
+      - xnnpack_integration
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestXNNPACKSerDes::test_combined_model
+      mode: mandatory_success
+      tags:
+      - xnnpack_integration
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestXNNPACKConv1dTransformPass::test_conv1d_with_relu_fc
+      mode: mandatory_success
+      tags:
+      - xnnpack_integration
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

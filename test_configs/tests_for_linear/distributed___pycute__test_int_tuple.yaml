@@ -1,0 +1,57 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/distributed/_pycute/test_int_tuple.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestIntTuple::test_crd2idx_basic
+      mode: mandatory_success
+      tags:
+      - distributed
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestIntTuple::test_crd2idx_idx2crd_roundtrip
+      mode: mandatory_success
+      tags:
+      - distributed
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestIntTuple::test_idx2crd_crd2idx_roundtrip
+      mode: mandatory_success
+      tags:
+      - distributed
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

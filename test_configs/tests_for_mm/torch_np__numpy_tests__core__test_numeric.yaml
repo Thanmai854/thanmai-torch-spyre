@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/torch_np/numpy_tests/core/test_numeric.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCross::test_broadcasting
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 11
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

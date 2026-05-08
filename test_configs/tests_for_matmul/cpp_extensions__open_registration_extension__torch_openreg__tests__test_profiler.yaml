@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/cpp_extensions/open_registration_extension/torch_openreg/tests/test_profiler.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestProfiler::test_profiler_elapsed_time
+      mode: mandatory_success
+      tags:
+      - cpp_extensions
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 100
+              - 100
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

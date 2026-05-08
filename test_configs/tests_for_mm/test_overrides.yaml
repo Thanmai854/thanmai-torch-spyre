@@ -1,0 +1,39 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_overrides.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestTorchFunctionOverride::test_mm_semantics
+      mode: mandatory_success
+      tags:
+      - overrides
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestBroadcastAllOverride::test_broadcast_all
+      mode: mandatory_success
+      tags:
+      - overrides
+      edits:
+        dtypes:
+          include:
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,84 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/jit/test_batch_mm.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestBatchMM::test_batch_mm_side_prohibited_mutation_common_side
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestBatchMM::test_batch_mm_side_prohibited_mutation_uncommon_side
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestBatchMM::test_batch_mm_side_permitted_mutation
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestBatchMM::test_batch_mm_prohibited_mutation_if_node
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestBatchMM::test_batch_mm_prohibited_mutation_multiple_adds
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestBatchMM::test_batch_mm_prohibited_mutation
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestBatchMM::test_batch_mm_permitted_mutation
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestBatchMM::test_batch_mm_no_mutation
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

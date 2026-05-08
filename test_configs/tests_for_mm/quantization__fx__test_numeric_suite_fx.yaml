@@ -1,0 +1,32 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/quantization/fx/test_numeric_suite_fx.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFXNumericSuiteCoreAPIs::test_extract_weights_mod_ptq
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

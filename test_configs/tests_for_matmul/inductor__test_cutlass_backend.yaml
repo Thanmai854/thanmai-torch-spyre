@@ -1,0 +1,79 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_cutlass_backend.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCutlassBackend::test_evt_reuse_matmul_input
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1024
+              - 1024
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCutlassBackend::test_cutlass_backend_matmul_nonzero_offset
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestCutlassBackend::test_diff_matmul_share_same_kernel
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCutlassBackend::test_cutlass_backend_matmul_same_tensor
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestCutlassBackend::test_max_autotune_cutlass_backend_no_fusion_dtype_mismatch
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

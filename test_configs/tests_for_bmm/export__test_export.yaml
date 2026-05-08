@@ -1,0 +1,33 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/export/test_export.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestExport::test_baddbmm
+      mode: mandatory_success
+      tags:
+      - export
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 64
+              - 1
+              - 192
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

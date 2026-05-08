@@ -1,0 +1,76 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/jit/test_optimize_for_mobile_preserve_debug_info.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestOptimizeForMobilePreserveDebugInfo::test_fuse_activation_with_pack_ops_linear_conv2d_4
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestOptimizeForMobilePreserveDebugInfo::test_fuse_activation_with_pack_ops_linear_conv2d_3
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestOptimizeForMobilePreserveDebugInfo::test_fuse_activation_with_pack_ops_linear_conv2d_2
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestOptimizeForMobilePreserveDebugInfo::test_fuse_activation_with_pack_ops_linear_conv2d_1
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestOptimizeForMobilePreserveDebugInfo::test_insert_pre_packed_linear_op
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 2
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestOptimizeForMobilePreserveDebugInfo::test_insert_pre_packed_linear_before_inline_and_conv_2d_op
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

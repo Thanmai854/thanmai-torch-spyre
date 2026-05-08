@@ -1,0 +1,75 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_pytree.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCxxPytree::test_pytree_serialize
+      mode: mandatory_success
+      tags:
+      - pytree
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestCxxPytree::test_pytree_custom_type_serialize
+      mode: mandatory_success
+      tags:
+      - pytree
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestPythonPytree::test_saved_serialized
+      mode: mandatory_success
+      tags:
+      - pytree
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestPythonPytree::test_pytree_context_serialize_bad
+      mode: mandatory_success
+      tags:
+      - pytree
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestPythonPytree::test_pytree_serialize_register_bad
+      mode: mandatory_success
+      tags:
+      - pytree
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestPythonPytree::test_pytree_custom_type_serialize
+      mode: mandatory_success
+      tags:
+      - pytree
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestPythonPytree::test_pytree_custom_type_serialize_bad
+      mode: mandatory_success
+      tags:
+      - pytree
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

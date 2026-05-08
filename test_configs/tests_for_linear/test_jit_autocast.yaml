@@ -1,0 +1,45 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_jit_autocast.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestAutocast::test_linear_bf16
+      mode: mandatory_success
+      tags:
+      - jit_autocast
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestAutocast::test_script_module
+      mode: mandatory_success
+      tags:
+      - jit_autocast
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,86 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/fx/test_fx_param_shape_control_flow.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestConstParamShapeInControlFlow::test_param_ndim_const
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 15
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestConstParamShapeInControlFlow::test_param_shape_const
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 5
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestConstParamShapeInControlFlow::test_param_size_const
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 5
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestConstParamShapeInControlFlow::test_param_dim_const
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 15
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

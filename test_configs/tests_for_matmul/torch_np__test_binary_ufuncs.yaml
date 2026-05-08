@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/torch_np/test_binary_ufuncs.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestBinaryUfuncBasic::test_matmul
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

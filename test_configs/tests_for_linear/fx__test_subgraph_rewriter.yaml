@@ -1,0 +1,48 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/fx/test_subgraph_rewriter.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestSubgraphRewriter::test_subgraph_rewriter_nodes_with_kwargs
+      mode: mandatory_success
+      tags:
+      - fx
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSubgraphRewriter::test_subgraph_rewriter_local_revert
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

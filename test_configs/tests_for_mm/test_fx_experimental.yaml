@@ -1,0 +1,46 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_fx_experimental.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFXExperimental::test_sparse_nn_partition
+      mode: mandatory_success
+      tags:
+      - fx_experimental
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFXExperimental::test_split_module_return_node
+      mode: mandatory_success
+      tags:
+      - fx_experimental
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

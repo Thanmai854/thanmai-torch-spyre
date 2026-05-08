@@ -1,0 +1,31 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/onnx/test_pytorch_onnx_shape_inference.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestONNXCustomOpShapeInference::test_setType_maintains_output_shape_for_single_custom_op_with_dynamic_axes
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

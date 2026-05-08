@@ -1,0 +1,26 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_fp8.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFP8Lowering::test_unacceptable_scale_dims_rowwise_scaling
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

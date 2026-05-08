@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/fx/test_partitioner_order.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestPartitionerOrder::test_partitioner_graph_node_order
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestPartitionerOrder::test_partitioner_multiple_runs_order
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

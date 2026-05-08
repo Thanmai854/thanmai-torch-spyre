@@ -1,0 +1,164 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/onnx/test_pytorch_onnx_onnxruntime.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestONNXRuntime::test_torch_mm
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestONNXRuntime::test_baddbmm_dynamic
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestONNXRuntime::test_baddbmm
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestONNXRuntime::test_fuse_addmm
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestONNXRuntime::test_maxpool_2d
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 20
+              - 16
+              - 50
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestONNXRuntime::test_cdist_euclid_dist
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 32
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestONNXRuntime::test_reduced_sum_dtypes
+      mode: mandatory_success
+      tags:
+      - onnx
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestONNXRuntime::test_cdist_euclid_dist_if_necessary
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 32
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

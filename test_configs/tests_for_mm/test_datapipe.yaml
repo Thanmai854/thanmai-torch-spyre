@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_datapipe.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestDataFramesPipes::test_collate
+      mode: mandatory_success
+      tags:
+      - datapipe
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestFunctionalMapDataPipe::test_map_mapdatapipe
+      mode: mandatory_success
+      tags:
+      - datapipe
+      edits:
+        dtypes:
+          include:
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

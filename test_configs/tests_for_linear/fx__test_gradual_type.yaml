@@ -1,0 +1,50 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/fx/test_gradual_type.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TypeCheckerTest::test_type_check_conv2D_maxpool2d_flatten
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 3
+              - 32
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TypeCheckerTest::test_type_check_symbolic_inferenceconv2D_maxpool2d_flatten
+      mode: mandatory_success
+      tags:
+      - fx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 6
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

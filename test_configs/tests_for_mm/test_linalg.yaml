@@ -1,0 +1,278 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_linalg.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestLinalg::test_baddbmm
+      mode: xfail
+      tags:
+      - linalg
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestLinalg::test_mm_empty_inputs_mixed_dtype_errors
+      mode: mandatory_success
+      tags:
+      - linalg
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestLinalg::test_bmm
+      mode: xfail
+      tags:
+      - linalg
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestLinalg::test_addbmm
+      mode: xfail
+      tags:
+      - linalg
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestLinalg::test_addmm_mv
+      mode: xfail
+      tags:
+      - linalg
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestLinalg::test_grouped_mm_cpu_unaligned
+      mode: xfail
+      tags:
+      - linalg
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestLinalg::test_baddbmm_nan_input_with_zero_beta
+      mode: xfail
+      tags:
+      - linalg
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - TestLinalg::test_baddbmm_input_dtypes_compatibility
+      mode: xfail
+      tags:
+      - linalg
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestLinalg::test__int_mm_cpu
+      mode: xfail
+      tags:
+      - linalg
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestLinalg::test__int4_mm
+      mode: xfail
+      tags:
+      - linalg
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestLinalg::test_broadcast_fused_matmul
+      mode: mandatory_success
+      tags:
+      - linalg
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestLinalg::test_blas_nan_out
+      mode: xfail
+      tags:
+      - linalg
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestLinalg::test_blas_empty
+      mode: mandatory_success
+      tags:
+      - linalg
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestLinalg::test_foreach_powsum
+      mode: xfail
+      tags:
+      - linalg
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestLinalg::test_eigh_lwork_lapack
+      mode: xfail
+      tags:
+      - linalg
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3000
+              - 3000
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestLinalg::test_lower_precision_accumulation_with_ref_path
+      mode: mandatory_success
+      tags:
+      - linalg
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestLinalg::test_1_sized_with_0_strided
+      mode: xfail
+      tags:
+      - linalg
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 1
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

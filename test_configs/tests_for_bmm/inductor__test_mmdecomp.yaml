@@ -1,0 +1,106 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_mmdecomp.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestDecomp::test_bmm_outer_product_k_is_one
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 1
+              - 256
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestDecomp::test_bmm_outer_product_k_is_one_with_unbacked_k
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestDecomp::test_bmm_batch2_last_dim_size_is_one
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestDecomp::test_bmm_outer_product_permuted_inputs
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestDecomp::test_batched_mm
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestDecomp::test_some_batched
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

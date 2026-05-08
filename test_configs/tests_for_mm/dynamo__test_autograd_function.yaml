@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/dynamo/test_autograd_function.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - AutogradFunctionFunctorchTests::test_old_style_autograd_function_with_grad_compiled
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

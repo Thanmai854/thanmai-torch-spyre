@@ -1,0 +1,66 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/higher_order_ops/test_invoke_subgraph.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestInvokeSubgraphCompile::test_module_method
+      mode: mandatory_success
+      tags:
+      - higher_order_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestInvokeSubgraphCompile::test_no_raise_on_reparameterize_module
+      mode: mandatory_success
+      tags:
+      - higher_order_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestInvokeSubgraphCompile::test_raise_with_reparameterize_but_module_mutation
+      mode: mandatory_success
+      tags:
+      - higher_order_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

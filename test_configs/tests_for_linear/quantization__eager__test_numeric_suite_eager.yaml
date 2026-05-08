@@ -1,0 +1,85 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/quantization/eager/test_numeric_suite_eager.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestNumericSuiteEager::test_compare_model_stub_linear_static
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNumericSuiteEager::test_compare_model_stub_linear_dynamic
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNumericSuiteEager::test_compare_model_outputs_linear_static
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNumericSuiteEager::test_compare_model_outputs_linear_dynamic
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNumericSuiteEager::test_compare_weights_linear_dynamic
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNumericSuiteEager::test_compare_weights_linear_static
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNumericSuiteEager::test_compare_model_stub_partial
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,66 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/ao/sparsity/test_parametrization.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFakeSparsity::test_masking_logic
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFakeSparsity::test_jit_trace
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFakeSparsity::test_weights_parametrized
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

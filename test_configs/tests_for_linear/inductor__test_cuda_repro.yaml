@@ -1,0 +1,122 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_cuda_repro.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - CudaReproTests::test_linear_cpu_input
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CudaReproTests::test_linear_with_zero_infeature_size
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - CudaReproTests::test_max_autotune_nograd
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CudaReproTests::test_epilogue_fusion_with_view
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 3
+              - 64
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CudaReproTests::test_view_replay_padding_issue_163328
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 36
+              - 9
+              - 7
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CudaReproTests::test_accuracy_issue1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - CudaReproTests::test_issue100806
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

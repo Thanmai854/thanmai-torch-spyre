@@ -1,0 +1,58 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_cpp_extensions_aot.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestMAIATensor::test_matmul_autocast_float16_precision
+      mode: mandatory_success
+      tags:
+      - cpp_extensions_aot
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestMAIATensor::test_matmul_autocast_default_precision
+      mode: mandatory_success
+      tags:
+      - cpp_extensions_aot
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

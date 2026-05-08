@@ -1,0 +1,47 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/onnx/test_utility_funs.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestUtilityFuns::test_onnx_fallthrough
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 100
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestUtilityFuns::test_scope_of_nodes_when_combined_by_cse_pass
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

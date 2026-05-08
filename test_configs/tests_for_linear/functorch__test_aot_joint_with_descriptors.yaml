@@ -1,0 +1,174 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/functorch/test_aot_joint_with_descriptors.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestAOTJointWithDescriptors::test_fx_utils_simple_linear
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestAOTJointWithDescriptors::test_simple_linear_module
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestAOTJointWithDescriptors::test_no_annotation_on_gradient_acc_nodes
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestAOTJointWithDescriptors::test_multiple_outputs_module
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestAOTJointWithDescriptors::test_fx_utils_multiple_outputs
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestAOTJointWithDescriptors::test_fx_utils_node_consistency
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestAOTJointWithDescriptors::test_preserve_annotate_simple
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestAOTJointWithDescriptors::test_preserve_annotate_function
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestAOTJointWithDescriptors::test_static_input_indices
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

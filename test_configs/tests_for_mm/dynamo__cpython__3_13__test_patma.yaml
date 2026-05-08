@@ -1,0 +1,39 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/dynamo/cpython/3_13/test_patma.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestSyntaxErrors::test_len1_tuple_sequence_pattern_comma
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestTracing::test_default_wildcard
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestTracing::test_only_default_capture
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

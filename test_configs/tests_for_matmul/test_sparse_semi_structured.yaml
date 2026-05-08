@@ -1,0 +1,86 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_sparse_semi_structured.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestSparseSemiStructuredTraining::test_sp24_matmuls_bmm
+      mode: mandatory_success
+      tags:
+      - sparse_semi_structured
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 6
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSparseSemiStructuredTraining::test_sp24_matmuls_mat_vec
+      mode: mandatory_success
+      tags:
+      - sparse_semi_structured
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSparseSemiStructuredTraining::test_sp24_matmuls
+      mode: mandatory_success
+      tags:
+      - sparse_semi_structured
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - TestSparseSemiStructuredCUSPARSELT::test_cslt_sparse_mm_search
+      mode: xfail
+      tags:
+      - sparse_semi_structured
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

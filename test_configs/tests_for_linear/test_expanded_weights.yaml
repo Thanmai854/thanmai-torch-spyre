@@ -1,0 +1,117 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_expanded_weights.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestExpandedWeightHelperFunction::test_forward_helper
+      mode: mandatory_success
+      tags:
+      - expanded_weights
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExpandedWeightHelperFunction::test_forward_helper_failure_args
+      mode: mandatory_success
+      tags:
+      - expanded_weights
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestExpandedWeightFunctional::test_cnn_model_mean
+      mode: mandatory_success
+      tags:
+      - expanded_weights
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExpandedWeightFunctional::test_group_norm_model
+      mode: mandatory_success
+      tags:
+      - expanded_weights
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExpandedWeightFunctional::test_layer_norm_model
+      mode: mandatory_success
+      tags:
+      - expanded_weights
+      - layer_norm
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 7
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExpandedWeightModule::test_per_sample_api_compute_batch_size
+      mode: mandatory_success
+      tags:
+      - expanded_weights
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops:
+    - name: layer_norm
+      dtypes:
+      - name: float16
+        precision:
+          atol: 0.001
+          rtol: 0.001

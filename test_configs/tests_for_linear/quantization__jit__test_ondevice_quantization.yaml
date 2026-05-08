@@ -1,0 +1,102 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/quantization/jit/test_ondevice_quantization.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestOnDeviceDynamicPTQFinalize::test_device_side_api
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestOnDeviceDynamicPTQFinalize::test_serialization_deserialization
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestOnDeviceDynamicPTQInsertObservers::test_num_observers
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestOnDeviceDynamicPTQInsertObservers::test_observe_method
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestOnDeviceDynamicPTQInsertObservers::test_weight_only_observers
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestOnDeviceDynamicPTQInsertQuantDequant::test_num_quant_dequant_nodes
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestOnDeviceDynamicPTQInsertQuantDequant::test_quantize_forward_runs
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestOnDeviceDynamicPTQFinalize::test_quantize_forward
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestOnDeviceDynamicPTQFinalize::test_quantized_forward
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestOnDeviceDynamicPTQFinalize::test_against_offdevice_dynamic_ptq
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

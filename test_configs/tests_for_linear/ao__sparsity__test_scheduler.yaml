@@ -1,0 +1,66 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/ao/sparsity/test_scheduler.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestScheduler::test_constructor
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestScheduler::test_step
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestScheduler::test_lambda_scheduler
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

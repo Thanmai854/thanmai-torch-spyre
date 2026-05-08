@@ -1,0 +1,134 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/onnx/test_models.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestModels::test_vgg16_bn
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestModels::test_vgg19
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestModels::test_vgg19_bn
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestModels::test_squeezenet
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestModels::test_mobilenet
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestModels::test_fcn
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestModels::test_r2plus1d_18_video
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 3
+              - 4
+              - 112
+              - 112
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestModels::test_vgg16
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestModels::test_ops
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestModels::test_srresnet
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 3
+              - 224
+              - 224
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestModels::test_mnist
+      mode: mandatory_success
+      tags:
+      - onnx
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

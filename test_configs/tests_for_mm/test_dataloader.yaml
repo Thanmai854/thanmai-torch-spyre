@@ -1,0 +1,57 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_dataloader.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestDataLoader::test_default_collate_numpy_memmap
+      mode: mandatory_success
+      tags:
+      - dataloader
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestDataLoader::test_multiprocessing_iterdatapipe
+      mode: mandatory_success
+      tags:
+      - dataloader
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestDataLoaderPersistentWorkers::test_dataset_not_reset
+      mode: mandatory_success
+      tags:
+      - dataloader
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 28
+              - 28
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

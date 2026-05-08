@@ -1,0 +1,313 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_select_algorithm.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestSelectAlgorithm::test_bmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 32
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSelectAlgorithm::test_baddbmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 1
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSelectAlgorithm::test_addmm_fp16
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 320
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSelectAlgorithm::test_addmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 20
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSelectAlgorithm::test_mm_dup_args_view
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 64
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSelectAlgorithm::test_mm_dup_args
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSelectAlgorithm::test_mm_plus_mm3
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSelectAlgorithm::test_mm_plus_mm2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 512
+              - 512
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSelectAlgorithm::test_mm_plus_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSelectAlgorithm::test_mm_not_even_k
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 11
+              - 22
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSelectAlgorithm::test_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSelectAlgorithm::test_mm_dropout
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 12345
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSelectAlgorithm::test_convolution_as_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 33
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSelectAlgorithm::test_convolution_as_mm_triton_only
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 33
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSelectAlgorithm::test_preprocessing_single_choice
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 20
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExternKernelCaller::test_extern_kernel_caller_hash_key_deduplication
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 64
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,57 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_dynamic_shapes.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestPySymInt::test_max_of_unique_summation_opt
+      mode: mandatory_success
+      tags:
+      - dynamic_shapes
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestPySymInt::test_baddbmm_symint
+      mode: mandatory_success
+      tags:
+      - dynamic_shapes
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestPySymInt::test_sympy_optimized_add
+      mode: mandatory_success
+      tags:
+      - dynamic_shapes
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestPySymInt::test_expect_true_double_digits
+      mode: mandatory_success
+      tags:
+      - dynamic_shapes
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestPySymInt::test_prefer_deferred_runtime_assertions_over_guards
+      mode: mandatory_success
+      tags:
+      - dynamic_shapes
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

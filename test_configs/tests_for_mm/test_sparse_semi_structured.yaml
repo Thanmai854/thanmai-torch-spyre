@@ -1,0 +1,225 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_sparse_semi_structured.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestSparseSemiStructuredCUSPARSELT::test_sparse_semi_structured_scaled_mm_fp8
+      mode: xfail
+      tags:
+      - sparse_semi_structured
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestSparseSemiStructuredCUSPARSELT::test_cslt_sparse_mm_alpha_compile_autotune
+      mode: xfail
+      tags:
+      - sparse_semi_structured
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 256
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSparseSemiStructuredCUSPARSELT::test_csrc_cslt_sparse_mm_search
+      mode: mandatory_success
+      tags:
+      - sparse_semi_structured
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSparseSemiStructuredCUSPARSELT::test_sparse_semi_structured_scaled_mm
+      mode: xfail
+      tags:
+      - sparse_semi_structured
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 256
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSparseSemiStructuredTraining::test_gemm
+      mode: mandatory_success
+      tags:
+      - sparse_semi_structured
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestSparseSemiStructuredTraining::test_sp24_matmuls_bmm
+      mode: mandatory_success
+      tags:
+      - sparse_semi_structured
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 6
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSparseSemiStructuredCUSPARSELT::test_cslt_sparse_mm_search
+      mode: xfail
+      tags:
+      - sparse_semi_structured
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSparseSemiStructuredCUSPARSELT::test_cslt_sparse_mm_alpha_mixed_dtype
+      mode: xfail
+      tags:
+      - sparse_semi_structured
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 256
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSparseSemiStructuredCUSPARSELT::test_cslt_sparse_mm_alpha
+      mode: xfail
+      tags:
+      - sparse_semi_structured
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSparseSemiStructuredCUSPARSELT::test_cslt_sparse_mm_mixed_dtype
+      mode: xfail
+      tags:
+      - sparse_semi_structured
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSparseSemiStructuredCUTLASS::test_sparse_semi_structured_ops_cutlass
+      mode: xfail
+      tags:
+      - sparse_semi_structured
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

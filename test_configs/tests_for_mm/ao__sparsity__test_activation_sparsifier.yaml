@@ -1,0 +1,32 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/ao/sparsity/test_activation_sparsifier.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestActivationSparsifier::test_activation_sparsifier
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 1
+              - 28
+              - 28
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

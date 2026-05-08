@@ -1,0 +1,52 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/lazy/test_meta_kernel.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestMetaKernel::test_addmm
+      mode: mandatory_success
+      tags:
+      - lazy
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestMetaKernel::test_addmm_invalid_dtype
+      mode: mandatory_success
+      tags:
+      - lazy
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

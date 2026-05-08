@@ -1,0 +1,102 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_serialization.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestSerialization::test_mmap_load_offset_calculation
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSerialization::test_serialization_mmap_loading
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSerialization::test_serialization_mmap_loading_ctx
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSerialization::test_serialization_mmap_loading_options
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestSerialization::test_serialization_mmap_loading_with_map_location
+      mode: mandatory_success
+      tags:
+      - serialization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 1024
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

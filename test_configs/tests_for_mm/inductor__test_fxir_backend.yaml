@@ -1,0 +1,49 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_fxir_backend.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - FxirTestCase::test_extern
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - FxirTestCase::test_fallback
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestReplaceFloorDiv::test_rewrite_floor_div_rational_const
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

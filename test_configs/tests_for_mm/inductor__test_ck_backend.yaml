@@ -1,0 +1,52 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_ck_backend.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCKBackend::test_max_autotune_addmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4096
+              - 2048
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCKBackend::test_max_autotune_precompile_preselected
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2048
+              - 256
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,223 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_mkldnn_pattern_matcher.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestDynamicPatternMatcherGeneric::test_multi_linear_share_same_input_dynamic
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_multi_linear_share_same_input
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 4
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_linear_binary_broadcast_shapes
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestPatternMatcher::test_linear_binary
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestPatternMatcher::test_linear_add_bias
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_linear_input_non_contiguous_3D_wo_bias
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 32
+              - 1
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_linear_fp32
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_linear_unary
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcherGeneric::test_conv2d_linear_add_broadcast_shapes
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_reproduce_121253_issue_addmm_fusion_check
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

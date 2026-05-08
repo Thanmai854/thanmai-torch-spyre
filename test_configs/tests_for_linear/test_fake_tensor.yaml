@@ -1,0 +1,56 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_fake_tensor.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - FakeTensorTest::test_upsample_bilinear_small_channels
+      mode: mandatory_success
+      tags:
+      - fake_tensor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - FakeTensorPropTest::test_torch_load_with_fake_mode
+      mode: mandatory_success
+      tags:
+      - fake_tensor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - FakeTensorOperatorInvariants::test_move_module_under_fake
+      mode: mandatory_success
+      tags:
+      - fake_tensor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

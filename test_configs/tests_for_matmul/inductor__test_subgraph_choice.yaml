@@ -1,0 +1,23 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_subgraph_choice.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestSubgraphChoice::test_subgraph_decompose_k
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

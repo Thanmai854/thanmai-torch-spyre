@@ -1,0 +1,115 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_scaled_matmul_cuda.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFP8Matmul::test_blockwise_mxfp8_nvfp4_error_messages
+      mode: mandatory_success
+      tags:
+      - scaled_matmul_cuda
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestFP8Matmul::test_honor_sm_carveout
+      mode: mandatory_success
+      tags:
+      - scaled_matmul_cuda
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8192
+              - 2048
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFP8Matmul::test_scaled_mm_block_wise_numerics
+      mode: mandatory_success
+      tags:
+      - scaled_matmul_cuda
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestFP8Matmul::test_scaled_mm_vs_emulated_row_wise
+      mode: xfail
+      tags:
+      - scaled_matmul_cuda
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 512
+              - 256
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFP8Matmul::test_scaled_mm_vs_emulated
+      mode: xfail
+      tags:
+      - scaled_matmul_cuda
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestFP8Matmul::test_zero_dim_tensorwise
+      mode: xfail
+      tags:
+      - scaled_matmul_cuda
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

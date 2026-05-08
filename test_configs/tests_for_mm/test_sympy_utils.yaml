@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_sympy_utils.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestSympySolve::test_simple_floordiv_gcd
+      mode: mandatory_success
+      tags:
+      - sympy_utils
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestSympyInterp::test_interp
+      mode: mandatory_success
+      tags:
+      - sympy_utils
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

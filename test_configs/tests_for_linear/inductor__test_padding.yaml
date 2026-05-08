@@ -1,0 +1,79 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_padding.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - PaddingTest::test_LinearAndSoftmax_codegen
+      mode: mandatory_success
+      tags:
+      - inductor
+      - softmax
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - PerfTestBetweenGoodAndBadShape::test_LinearAndSoftmax_both_shapes
+      mode: mandatory_success
+      tags:
+      - inductor
+      - softmax
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - PaddingTest::test_nobias_LinearAndSoftmax_codegen
+      mode: mandatory_success
+      tags:
+      - inductor
+      - softmax
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - PerfTestBetweenGoodAndBadShape::test_nobias_LinearAndSoftmax_both_shapes
+      mode: mandatory_success
+      tags:
+      - inductor
+      - softmax
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - PerfTestWithAndWithoutPadding::test_nvidia_deeprecommender
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 256
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops:
+    - name: softmax
+      dtypes:
+      - name: float16
+        precision:
+          atol: 0.001
+          rtol: 0.001

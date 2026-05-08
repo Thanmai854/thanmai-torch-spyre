@@ -1,0 +1,492 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_pattern_matcher.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestPatternMatcher::test_cat_addmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_bmm_to_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 16
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_unfuse_bias_addmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 15
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_unfuse_bias_addmm_half_dtypes
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 15
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_unfuse_bias_addmm_half_dtypes_when_flag_disabled
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 15
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_addmm_alpha_beta_with_pointwise
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_original_aten_preserved_split_addmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 24
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_addmm_dtype_mismatch
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1024
+              - 1024
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_mm_plus_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_mixed_mm_exhaustive
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 256
+              - 256
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_addmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_mixed_mm_bad_cases
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestPatternMatcher::test_addmm_symbolic_scalar
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_mixed_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestPatternMatcher::test_cat_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 16
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_fused_int_mm_mul
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_mixed_mm_epi_works
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestPatternMatcher::test_fused_int_mm_mul_gating
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_fused_int_mm_mul_epilogue
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_addmm_broadcasting_bias
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_match_equivalent_function_invocations1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 15
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_replace_by_example_in_pre_grad
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 15
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_match_equivalent_function_invocations2
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 15
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_match_equivalent_function_invocations3
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 15
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPatternMatcher::test_bound_method_pattern_matcher
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

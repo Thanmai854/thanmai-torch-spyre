@@ -1,0 +1,107 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_torchinductor.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - CommonTemplate::test_matmul_layer_norm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - layer_norm
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - CommonTemplate::test_allow_reuse_disable_if_exceed_peak
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 100
+              - 100
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_graph_partition_refcount
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_list_clearing
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_deterministic_codegen_with_suffix
+      mode: mandatory_success
+      tags:
+      - inductor
+      - softmax
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 256
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops:
+    - name: layer_norm
+      dtypes:
+      - name: float16
+        precision:
+          atol: 0.001
+          rtol: 0.001
+    - name: softmax
+      dtypes:
+      - name: float16
+        precision:
+          atol: 0.001
+          rtol: 0.001

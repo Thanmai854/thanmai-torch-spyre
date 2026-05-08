@@ -1,0 +1,154 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_custom_ops.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - MiniOpTest::test_mm_errors
+      mode: mandatory_success
+      tags:
+      - custom_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - MiniOpTest::test_mm_fake
+      mode: mandatory_success
+      tags:
+      - custom_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - MiniOpTest::test_mm_meta
+      mode: mandatory_success
+      tags:
+      - custom_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - MiniOpTest::test_mm
+      mode: mandatory_success
+      tags:
+      - custom_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCustomOpAPI::test_library_get_kernel
+      mode: mandatory_success
+      tags:
+      - custom_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCustomOp::test_supported_param_types
+      mode: mandatory_success
+      tags:
+      - custom_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestCustomOp::test_infer_schema_unsupported
+      mode: mandatory_success
+      tags:
+      - custom_ops
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestCustomOp::test_supported_schemas
+      mode: mandatory_success
+      tags:
+      - custom_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestCustomOp::test_impl_invalid_devices
+      mode: mandatory_success
+      tags:
+      - custom_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestCustomOpAPI::test_no_grad_skips_autograd
+      mode: mandatory_success
+      tags:
+      - custom_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

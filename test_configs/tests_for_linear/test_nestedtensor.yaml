@@ -1,0 +1,32 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_nestedtensor.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestNestedTensorDeviceType::test_linear_noncontiguous
+      mode: xfail
+      tags:
+      - nestedtensor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

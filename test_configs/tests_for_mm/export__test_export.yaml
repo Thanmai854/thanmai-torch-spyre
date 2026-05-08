@@ -1,0 +1,106 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/export/test_export.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestExport::test_baddbmm
+      mode: mandatory_success
+      tags:
+      - export
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 64
+              - 1
+              - 192
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExport::test_uplift_common_custom_meta_with_multiple_calls
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExport::test_uplift_common_custom_meta
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExport::test_torch_check_eq_commutativity
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExport::test_buffer_util
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 20
+              - 100
+              - 35
+              - 45
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

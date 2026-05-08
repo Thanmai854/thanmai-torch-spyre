@@ -1,0 +1,176 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_fx_experimental.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFXExperimental::test_split_module_default_arg
+      mode: mandatory_success
+      tags:
+      - fx_experimental
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 50
+              - 512
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFXExperimental::test_split_qualname_mapping
+      mode: mandatory_success
+      tags:
+      - fx_experimental
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestFXExperimental::test_subgraph_uniquename
+      mode: mandatory_success
+      tags:
+      - fx_experimental
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFXExperimental::test_large_node_error
+      mode: mandatory_success
+      tags:
+      - fx_experimental
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFXExperimental::test_size_based_partition
+      mode: mandatory_success
+      tags:
+      - fx_experimental
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFXExperimental::test_partition_device_mapping
+      mode: mandatory_success
+      tags:
+      - fx_experimental
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFXExperimental::test_partition_latency
+      mode: mandatory_success
+      tags:
+      - fx_experimental
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFXExperimental::test_cost_aware_partition
+      mode: mandatory_success
+      tags:
+      - fx_experimental
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFXExperimental::test_saturate_host
+      mode: mandatory_success
+      tags:
+      - fx_experimental
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFXExperimental::test_subgraph_creation
+      mode: mandatory_success
+      tags:
+      - fx_experimental
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

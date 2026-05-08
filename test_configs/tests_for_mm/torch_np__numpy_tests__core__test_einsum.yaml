@@ -1,0 +1,159 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/torch_np/numpy_tests/core/test_einsum.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestEinsum::test_einsum_sums_int64
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestEinsumPath::test_edge_paths
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestEinsum::test_broadcasting_dot_cases
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 5
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestEinsum::test_small_boolean_arrays
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestEinsum::test_einsum_sums_cfloat128
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestEinsum::test_einsum_sums_float64
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestEinsum::test_einsum_sums_float16
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestEinsum::test_einsum_sums_int8
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestEinsum::test_einsum_sums_cfloat64
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

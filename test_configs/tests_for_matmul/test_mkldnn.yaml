@@ -1,0 +1,45 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_mkldnn.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestMkldnn::test_matmul_lower_precision
+      mode: mandatory_success
+      tags:
+      - mkldnn
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 64
+              - 1
+              - 33
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestMkldnn::test_default_use_parent
+      mode: mandatory_success
+      tags:
+      - mkldnn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

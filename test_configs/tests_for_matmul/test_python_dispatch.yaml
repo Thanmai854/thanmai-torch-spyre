@@ -1,0 +1,35 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_python_dispatch.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestPythonRegistration::test_register_fallthrough
+      mode: mandatory_success
+      tags:
+      - python_dispatch
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,262 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_aot_inductor.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - AOTInductorTestsTemplate::test_mm_out_dtype
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_bmm_multiple_dynamic
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_scaled_grouped_mm
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - AOTInductorTestsTemplate::test_large_mmaped_weights_on_disk
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 250112
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_addmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_addmm_multiple_dynamic
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_large_mmaped_weights
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 250112
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_linear_dynamic_maxautotune
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_fp8
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_fp8_view_of_param
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_zero_grid_with_unbacked_symbols
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_run_with_grad_enabled
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_triton_kernel_extern_kernel_arg
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AOTInductorTestsTemplate::test_aoti_debug_printer_codegen
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_aoti_profiler
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - AOTInductorTestsTemplate::test_aoti_debug_printing_model_inputs_codegen
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 20
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

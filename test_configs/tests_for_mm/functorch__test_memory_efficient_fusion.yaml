@@ -1,0 +1,84 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/functorch/test_memory_efficient_fusion.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - ReduceTestCase::test_nested_immutable_list_type
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - ReduceTestCase::test_immutable_list_multiple_entries
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - ReduceTestCase::test_immutable_list_type
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - NoChangeTestCase::test_hash_with_numbers
+      mode: mandatory_success
+      tags:
+      - functorch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 100
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

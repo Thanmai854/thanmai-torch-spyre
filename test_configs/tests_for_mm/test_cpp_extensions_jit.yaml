@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_cpp_extensions_jit.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCppExtensionJIT::test_pch_command_injection
+      mode: mandatory_success
+      tags:
+      - cpp_extensions_jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

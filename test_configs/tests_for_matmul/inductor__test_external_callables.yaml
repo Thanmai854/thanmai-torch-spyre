@@ -1,0 +1,66 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_external_callables.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestInductorExternalCallable::test_matmul_cpu
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestInductorExternalCallable::test_matmul_cuda
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestInductorExternalCallable::test_matmul_dup
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

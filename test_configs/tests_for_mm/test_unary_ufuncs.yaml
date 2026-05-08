@@ -1,0 +1,131 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_unary_ufuncs.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestUnaryUfuncs::test_igammac_common
+      mode: xfail
+      tags:
+      - unary_ufuncs
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestUnaryUfuncs::test_igammac_edge_cases
+      mode: xfail
+      tags:
+      - unary_ufuncs
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestUnaryUfuncs::test_mvlgamma_inplace_integer_error
+      mode: mandatory_success
+      tags:
+      - unary_ufuncs
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestUnaryUfuncs::test_mvlgamma_integer_promotion
+      mode: mandatory_success
+      tags:
+      - unary_ufuncs
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 6
+              - 7
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestUnaryUfuncs::test_igamma_edge_cases
+      mode: xfail
+      tags:
+      - unary_ufuncs
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestUnaryUfuncs::test_igamma_common
+      mode: xfail
+      tags:
+      - unary_ufuncs
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestUnaryUfuncs::test_digamma
+      mode: xfail
+      tags:
+      - unary_ufuncs
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

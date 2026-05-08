@@ -1,0 +1,82 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_linalg.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestLinalg::test_matmul_mv
+      mode: xfail
+      tags:
+      - linalg
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestLinalg::test_broadcast_batched_matmul
+      mode: mandatory_success
+      tags:
+      - linalg
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestLinalg::test_broadcast_fused_matmul
+      mode: mandatory_success
+      tags:
+      - linalg
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestLinalg::test_permute_matmul
+      mode: mandatory_success
+      tags:
+      - linalg
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 5
+              - 24
+              - 24
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

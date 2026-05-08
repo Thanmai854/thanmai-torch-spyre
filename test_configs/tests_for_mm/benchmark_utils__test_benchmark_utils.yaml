@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/benchmark_utils/test_benchmark_utils.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestBenchmarkUtils::test_adaptive_timer
+      mode: mandatory_success
+      tags:
+      - benchmark_utils
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

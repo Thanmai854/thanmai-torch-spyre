@@ -1,0 +1,103 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_namedtensor.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestNamedTensor::test_bmm
+      mode: mandatory_success
+      tags:
+      - namedtensor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 7
+              - 3
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNamedTensor::test_addmm
+      mode: mandatory_success
+      tags:
+      - namedtensor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNamedTensor::test_mm
+      mode: mandatory_success
+      tags:
+      - namedtensor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNamedTensor::test_cummax_cummin
+      mode: mandatory_success
+      tags:
+      - namedtensor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNamedTensor::test_rename
+      mode: mandatory_success
+      tags:
+      - namedtensor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,48 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_provenance_tracing.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestProvenanceTracingNodeMeta::test_pattern_matcher_transfer_meta
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - ProvenanceTracingKernelContextTemplate::test_jit_inductor_with_flag
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 20
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

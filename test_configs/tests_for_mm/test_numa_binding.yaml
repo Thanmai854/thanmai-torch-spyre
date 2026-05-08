@@ -1,0 +1,111 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_numa_binding.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - NumaBindingTest::test_core_complex_numa_binding_with_extra_l3
+      mode: mandatory_success
+      tags:
+      - numa_binding
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - NumaBindingTest::test_socket_numa_binding_with_single_numa_per_socket
+      mode: mandatory_success
+      tags:
+      - numa_binding
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - NumaBindingTest::test_socket_numa_binding_with_multiple_numa_per_socket
+      mode: mandatory_success
+      tags:
+      - numa_binding
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - NumaBindingTest::test_fallback
+      mode: mandatory_success
+      tags:
+      - numa_binding
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - NumaBindingTest::test_no_numa_binding_if_numa_options_not_provided
+      mode: mandatory_success
+      tags:
+      - numa_binding
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - NumaBindingTest::test_node_numa_binding
+      mode: mandatory_success
+      tags:
+      - numa_binding
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - NumaBindingTest::test_core_complex_numa_binding_with_fewer_l3_than_gpu
+      mode: mandatory_success
+      tags:
+      - numa_binding
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - NumaBindingTest::test_core_complex_prefers_caches_with_more_cpus
+      mode: mandatory_success
+      tags:
+      - numa_binding
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - NumaBindingTest::test_core_complex_tiebreak_prefers_lower_cache_key
+      mode: mandatory_success
+      tags:
+      - numa_binding
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - NumaBindingTest::test_get_set_of_int_from_ranges_str
+      mode: mandatory_success
+      tags:
+      - numa_binding
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - NumaBindingTest::test_binds_to_node_0_if_node_stored_as_minus_one
+      mode: mandatory_success
+      tags:
+      - numa_binding
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

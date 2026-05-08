@@ -1,0 +1,110 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/nn/test_module_hooks.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestStateDictHooks::test_load_state_dict_pre_hook
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestStateDictHooks::test_no_extra_ref_to_module
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestStateDictHooks::test_pickled_hook
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestStateDictHooks::test_register_state_dict_pre_hook
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestStateDictHooks::test_register_state_dict_pre_hook_lazy_module
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestStateDictHooks::test_register_state_dict_post_hook
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

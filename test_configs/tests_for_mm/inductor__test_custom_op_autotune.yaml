@@ -1,0 +1,39 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_custom_op_autotune.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCustomOpAutoTune::test_empty_config_generator_falls_back_to_triton
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCustomOpAutoTune::test_fallback_choice_reuse
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

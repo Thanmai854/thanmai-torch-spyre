@@ -1,0 +1,93 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_auto_chunker.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - AutoChunkerTest::test_matmul_trivial
+      mode: mandatory_success
+      tags:
+      - inductor
+      - softmax
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 1024
+              - 768
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AutoChunkerTest::test_matmul_softmax_dynamic_shape
+      mode: mandatory_success
+      tags:
+      - inductor
+      - softmax
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 1024
+              - 768
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - AutoChunkerTest::test_matmul_softmax
+      mode: mandatory_success
+      tags:
+      - inductor
+      - softmax
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 1024
+              - 768
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops:
+    - name: softmax
+      dtypes:
+      - name: float16
+        precision:
+          atol: 0.001
+          rtol: 0.001

@@ -1,0 +1,181 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/jit/test_freezing.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFrozenOptimizations::test_linear_bn_folding_autocast_scenario_cuda
+      mode: mandatory_success
+      tags:
+      - jit
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - TestFrozenOptimizations::test_linear_multiple_blocks
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 50
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFrozenOptimizations::test_linear_concat_complex
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 50
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFrozenOptimizations::test_linear_concat
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 50
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFrozenOptimizations::test_bn_not_broadcast_with_linear
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestFrozenOptimizations::test_linear_bn_folding
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestFrozenOptimizations::test_linear_concat_different_input
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 50
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFrozenOptimizations::test_linear_transpose
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 30
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFrozenOptimizations::test_linear_non_constant_weight
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 30
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFreezing::test_freeze_module_no_forward
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFreezing::test_freeze_no_forward
+      mode: mandatory_success
+      tags:
+      - jit
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

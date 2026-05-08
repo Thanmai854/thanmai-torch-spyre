@@ -1,0 +1,69 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_torchinductor.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - CommonTemplate::test_baddbmm
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 6
+              - 1
+              - 100
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_bmm2
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 8
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - CommonTemplate::test_bmm1
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 16
+              - 8
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

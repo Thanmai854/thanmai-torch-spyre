@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_mkldnn_fusion.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestMkldnnFusion::test_linear_binary_fusion_ops
+      mode: mandatory_success
+      tags:
+      - mkldnn_fusion
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestMkldnnFusion::test_linear_unary_fusion_ops
+      mode: mandatory_success
+      tags:
+      - mkldnn_fusion
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

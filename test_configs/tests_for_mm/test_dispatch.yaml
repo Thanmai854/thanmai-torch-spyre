@@ -1,0 +1,48 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_dispatch.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestDispatch::test_computed_table
+      mode: mandatory_success
+      tags:
+      - dispatch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestDispatch::test_overwrite_math
+      mode: mandatory_success
+      tags:
+      - dispatch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestDispatch::test_computed_table_with_math
+      mode: mandatory_success
+      tags:
+      - dispatch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestDispatch::test_computed_table_with_cpu_math_autogradcpu_fallthrough
+      mode: mandatory_success
+      tags:
+      - dispatch
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

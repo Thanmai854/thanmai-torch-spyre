@@ -1,0 +1,57 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/torch_np/numpy_tests/core/test_numerictypes.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCommonType::test_scalar_loses2
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestCommonType::test_scalar_wins3
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestCommonType::test_scalar_wins2
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestCommonType::test_scalar_wins
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestCommonType::test_scalar_loses1
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

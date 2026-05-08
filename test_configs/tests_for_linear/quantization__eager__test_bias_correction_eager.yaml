@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/quantization/eager/test_bias_correction_eager.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestBiasCorrectionEager::test_linear_chain
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

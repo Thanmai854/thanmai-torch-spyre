@@ -1,0 +1,29 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_utils.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCheckpoint::test_infer_device_state_recursive_multi_gpu
+      mode: mandatory_success
+      tags:
+      - utils
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

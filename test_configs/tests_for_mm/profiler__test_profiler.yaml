@@ -1,0 +1,84 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/profiler/test_profiler.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestExperimentalUtils::test_profiler_name_pattern
+      mode: mandatory_success
+      tags:
+      - profiler
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4096
+              - 4096
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPrivateUse1ProfilerState::test_kineto_privateuse1_fallback_state_with_use_kineto_false
+      mode: mandatory_success
+      tags:
+      - profiler
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestPrivateUse1ProfilerState::test_privateuse1_fallback_requires_use_cpu
+      mode: mandatory_success
+      tags:
+      - profiler
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestProfiler::test_public_api_post_processing_timeout_none
+      mode: mandatory_success
+      tags:
+      - profiler
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestProfiler::test_nested_tensor_with_shapes
+      mode: mandatory_success
+      tags:
+      - profiler
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

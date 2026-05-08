@@ -1,0 +1,81 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_jit_llga_fuser.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestOp::test_linear
+      mode: xfail
+      tags:
+      - jit_llga_fuser
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 28
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFusionPattern::test_linear_eltwise
+      mode: xfail
+      tags:
+      - jit_llga_fuser
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 28
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestOp::test_typecheck
+      mode: xfail
+      tags:
+      - jit_llga_fuser
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 32
+              - 28
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,66 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_stateless.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestStatelessFunctionalAPI::test_reparametrized_module_change_parametrization_original
+      mode: mandatory_success
+      tags:
+      - stateless
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestStatelessFunctionalAPI::test_tied_weights_warns
+      mode: mandatory_success
+      tags:
+      - stateless
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestStatelessDeprecation::test_stateless_functional_call_warns
+      mode: mandatory_success
+      tags:
+      - stateless
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

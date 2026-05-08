@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/profiler/test_execution_trace.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestExecutionTrace::test_triton_fx_graph_with_et
+      mode: mandatory_success
+      tags:
+      - profiler
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

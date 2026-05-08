@@ -1,0 +1,59 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_max_autotune_blackwell.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestMaxAutotuneBlackwell::test_blackwell_max_autotune_scaled_mm_per_row_persistent_tma
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestMaxAutotuneBlackwell::test_blackwell_max_autotune_addmm_persistent_tma
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - TestMaxAutotuneBlackwell::test_blackwell_max_autotune_scaled_mm_per_tensor_persistent_tma
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+    - names:
+      - TestMaxAutotuneBlackwell::test_blackwell_max_autotune_regular_mm_persistent_tma
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

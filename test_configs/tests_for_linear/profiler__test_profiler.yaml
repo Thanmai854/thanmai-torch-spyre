@@ -1,0 +1,48 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/profiler/test_profiler.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestProfiler::test_flops
+      mode: mandatory_success
+      tags:
+      - profiler
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestProfiler::test_nested_tensor_with_shapes
+      mode: mandatory_success
+      tags:
+      - profiler
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

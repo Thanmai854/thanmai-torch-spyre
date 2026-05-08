@@ -1,0 +1,66 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_custom_op_autotune.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestCustomOpAutoTune::test_partial_input_gen_fns
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 256
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCustomOpAutoTune::test_torch_cond_with_shape_accessing_implementations
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 64
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestCustomOpAutoTune::test_min_speedup_threshold_api
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 256
+              - 128
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

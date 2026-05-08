@@ -1,0 +1,50 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_prims.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestPrimsBasic::test_check_deprecation_warning
+      mode: mandatory_success
+      tags:
+      - prims
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 1
+              - 2
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPrims::test_aten_overload_to_prims
+      mode: mandatory_success
+      tags:
+      - prims
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

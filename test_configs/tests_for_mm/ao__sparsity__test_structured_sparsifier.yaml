@@ -1,0 +1,50 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/ao/sparsity/test_structured_sparsifier.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFPGMPruner::test_compute_distance
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              - 9
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestBaseStructuredSparsifier::test_complex_conv2d
+      mode: mandatory_success
+      tags:
+      - ao
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 28
+              - 28
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

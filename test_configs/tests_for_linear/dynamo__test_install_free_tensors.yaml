@@ -1,0 +1,174 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/dynamo/test_install_free_tensors.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - InstallParamsAsGraphAttrTests::test_nested_linear
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - InstallParamsAsGraphAttrTests::test_breadth_linear
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - InstallParamsWhenExport::test_simple_linear
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - InstallParamsAsGraphAttrTests::test_optimizing_linear
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - InstallParamsAsGraphAttrTests::test_optimizing_params_in_input
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - InstallParamsAsGraphAttrTests::test_optimizing_buffer_and_param_in_input
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - InstallParamsWhenExport::test_optimizing_params_in_input
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - InstallParamsWhenExport::test_optimizing_buffer_in_input
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - InstallParamsWhenExport::test_optimizing_buffer_and_param_in_input
+      mode: mandatory_success
+      tags:
+      - dynamo
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

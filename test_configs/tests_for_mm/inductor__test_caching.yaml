@@ -1,0 +1,59 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_caching.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - ShouldPadMemoizerTest::test_should_pad_memoizer_different_ops_different_cache_entries
+      mode: mandatory_success
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 16
+              - 32
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - DeferredRecordingTest::test_deferred_recording_finalize_caches_result
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - DeferredRecordingTest::test_deferred_recording_finalize_without_callback
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - DeferredRecordingTest::test_deferred_recording_callback_after_finalize
+      mode: mandatory_success
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

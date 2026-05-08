@@ -1,0 +1,65 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/nn/test_init.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestNNInit::test_calculate_gain_nonlinear
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNNInit::test_calculate_gain_only_accepts_valid_nonlinearities
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestNNInit::test_calculate_gain_linear
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNNInit::test_calculate_gain_leaky_relu
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestNNInit::test_calculate_gain_leaky_relu_only_accepts_numbers
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

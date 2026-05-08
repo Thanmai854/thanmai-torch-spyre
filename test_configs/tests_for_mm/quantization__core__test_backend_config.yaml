@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/quantization/core/test_backend_config.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestBackendConfig::test_backend_op_config_set_input_type_to_index
+      mode: mandatory_success
+      tags:
+      - quantization
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

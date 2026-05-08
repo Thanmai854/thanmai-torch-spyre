@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_flex_attention.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFlexAttention::test_float32_matmul_precision
+      mode: xfail
+      tags:
+      - inductor
+      edits:
+        dtypes:
+          include:
+          - name: float32
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

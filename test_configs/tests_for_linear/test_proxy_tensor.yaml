@@ -1,0 +1,29 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_proxy_tensor.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestGenericProxyTensor::test_pre_dispatch_linear
+      mode: mandatory_success
+      tags:
+      - proxy_tensor
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

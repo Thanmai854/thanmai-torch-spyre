@@ -1,0 +1,81 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/export/test_converter.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestConverter::test_ts2ep_convert_quantized_model_with_opcontext
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestConverter::test_convert_nn_module_with_nested_param
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestConverter::test_convert_nn_module_with_nested_if_and_param
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 3
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestConverter::test_ts2ep_convert_quantized_model_with_opcontext_and_constant
+      mode: mandatory_success
+      tags:
+      - export
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

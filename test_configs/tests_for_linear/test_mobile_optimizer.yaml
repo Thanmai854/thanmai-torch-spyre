@@ -1,0 +1,49 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_mobile_optimizer.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestOptimizer::test_generate_mobile_module_lints
+      mode: mandatory_success
+      tags:
+      - mobile_optimizer
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestOptimizer::test_optimize_for_mobile
+      mode: mandatory_success
+      tags:
+      - mobile_optimizer
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              - 6
+              - 6
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

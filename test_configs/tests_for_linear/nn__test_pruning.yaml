@@ -1,0 +1,228 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/nn/test_pruning.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestPruningNN::test_pruning_id_consistency
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPruningNN::test_random_pruning_pickle
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 7
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPruningNN::test_random_pruning_orig
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 7
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPruningNN::test_random_pruning_new_weight
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 7
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPruningNN::test_random_pruning_forward
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPruningNN::test_remove_pruning_forward
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 5
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPruningNN::test_l1_unstructured_pruning_with_importance_scores
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestPruningNN::test_l1_unstructured_pruning
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestPruningNN::test_remove_pruning
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 7
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPruningNN::test_remove_pruning_exception
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 5
+              - 7
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPruningNN::test_global_pruning
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestPruningNN::test_global_pruning_importance_scores
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - TestPruningNN::test_pruning_serialization_model
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestPruningNN::test_pruning_serialization_state_dict
+      mode: mandatory_success
+      tags:
+      - nn
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

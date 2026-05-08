@@ -1,0 +1,91 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_fp8.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestFP8Lowering::test_scaled_mm_preserves_strides
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 128
+              - 64
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestFP8Types::test_scaled_mm_pdl_handles_none_bias
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestFP8Lowering::test_mx_fusion
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestFP8Lowering::test_rowwise_scaling_acceptable_input_dims
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+    - names:
+      - TestFP8Lowering::test_unacceptable_scale_dims_rowwise_scaling
+      mode: xfail
+      tags:
+      - inductor
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,34 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/export/test_draft_export.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestDraftExport::test_masked_linear
+      mode: mandatory_success
+      tags:
+      - export
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+          exclude:
+          - name: bfloat16
+            description: Not supported on Spyre
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

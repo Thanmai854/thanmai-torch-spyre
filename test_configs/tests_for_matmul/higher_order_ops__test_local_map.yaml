@@ -1,0 +1,30 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/higher_order_ops/test_local_map.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestLocalMap::test_fx_annotations
+      mode: mandatory_success
+      tags:
+      - higher_order_ops
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 80
+              - 80
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

@@ -1,0 +1,21 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/test_xnnpack_integration.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestXNNPACKRewritePass::test_decomposed_linear
+      mode: mandatory_success
+      tags:
+      - xnnpack_integration
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

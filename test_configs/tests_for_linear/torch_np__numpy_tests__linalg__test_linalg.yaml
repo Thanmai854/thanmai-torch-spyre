@@ -1,0 +1,203 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/torch_np/numpy_tests/linalg/test_linalg.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - LinalgGeneralizedNonsquareTestCase::test_generalized_nonsq_cases
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestMisc::test_byteorder_check
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 4
+              - 4
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestMatrixRank::test_reduced_rank
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 40
+              - 10
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestTensorsolve::test_tensorsolve_result
+      mode: mandatory_success
+      tags:
+      - torch_np
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              - 3
+              - 6
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestMisc::test_sdot_bug_8577
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float32
+    - names:
+      - LinalgGeneralizedNonsquareTestCase::test_generalized_empty_nonsq_cases
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - LinalgSquareTestCase::test_sq_cases
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - LinalgSquareTestCase::test_empty_sq_cases
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - LinalgNonsquareTestCase::test_nonsq_cases
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - LinalgNonsquareTestCase::test_empty_nonsq_cases
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - HermitianTestCase::test_herm_cases
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - HermitianTestCase::test_empty_herm_cases
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - LinalgGeneralizedSquareTestCase::test_generalized_sq_cases
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+    - names:
+      - TestSolve::test_0_size
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 2
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestDet::test_zero
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 1
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - LinalgGeneralizedSquareTestCase::test_generalized_empty_sq_cases
+      mode: mandatory_success
+      tags:
+      - torch_np
+      edits:
+        dtypes:
+          include:
+          - name: float16
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []

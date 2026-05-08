@@ -1,0 +1,37 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/inductor/test_unbacked_symints.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestUnbackedSymints::test_unbacked_linear_layer_norm_input
+      mode: mandatory_success
+      tags:
+      - inductor
+      - layer_norm
+      edits:
+        dtypes:
+          include:
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 256
+              - 1
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops:
+    - name: layer_norm
+      dtypes:
+      - name: float16
+        precision:
+          atol: 0.001
+          rtol: 0.001

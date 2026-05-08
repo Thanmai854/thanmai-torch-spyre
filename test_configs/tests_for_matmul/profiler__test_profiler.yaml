@@ -1,0 +1,50 @@
+test_suite_config:
+  files:
+  - path: ${PYTORCH_ROOT}/test/profiler/test_profiler.py
+    unlisted_test_mode: skip
+    tests:
+    - names:
+      - TestExperimentalUtils::test_profiler_matmul_dim_fp16_pattern
+      mode: mandatory_success
+      tags:
+      - profiler
+      - fp16
+      edits:
+        dtypes:
+          include:
+          - name: float16
+          - name: float32
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 200
+              - 200
+              dtype: float16
+              device: spyre
+              init: rand
+    - names:
+      - TestExperimentalUtils::test_profiler_fp32_matmul_pattern
+      mode: mandatory_success
+      tags:
+      - profiler
+      edits:
+        dtypes:
+          include:
+          - name: float16
+        inputs:
+          args:
+          - tensor:
+              shape:
+              - 100
+              - 100
+              dtype: float16
+              device: spyre
+              init: rand
+  global:
+    devices:
+    - spyre
+    supported_dtypes:
+    - name: float16
+    - name: float32
+    supported_ops: []
