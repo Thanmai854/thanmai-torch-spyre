@@ -2,10 +2,10 @@ name: torch-spyre-tests
 
 on:
   push:
-    branches: [GHA_integration_tests]
+    branches: [GHA_integration]
     tags: ['*']
   pull_request:
-    branches: [GHA_integration_tests]
+    branches: [GHA_integration]
   merge_group:
     types: [checks_requested]
 
