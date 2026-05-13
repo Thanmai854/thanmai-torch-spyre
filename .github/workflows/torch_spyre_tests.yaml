@@ -2,10 +2,10 @@ name: torch-spyre-tests
 
 on:
   push:
-    branches: [GHA_integration]
+    branches: [main]
     tags: ['*']
   pull_request:
-    branches: [GHA_integration]
+    branches: [main]
   merge_group:
     types: [checks_requested]
 
@@ -171,6 +171,17 @@ jobs:
           CONFIG="${{ matrix.suite.config }}"
 
           echo "Running ${{ matrix.suite.name }} tests..."
-          bash tests/run_test.sh "tests/configs/${CONFIG}" -v
+          mkdir -p test-results
+          bash tests/run_test.sh \
+            "tests/configs/${{ matrix.suite.config }}" \
+            --junit "test-results/${{ matrix.suite.name }}-results.xml" \
+            -v
           echo "${{ matrix.suite.name }} tests done"
+
+      - name: Upload JUnit results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-results-${{ matrix.suite.name }}
+          path: test-results/${{ matrix.suite.name }}-results.xml
 
