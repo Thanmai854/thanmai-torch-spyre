@@ -2,10 +2,10 @@ name: torch-spyre-tests
 
 on:
   push:
-    branches: [main]
+    branches: [GHA_integration]
     tags: ['*']
   pull_request:
-    branches: [main]
+    branches: [GHA_integration]
   merge_group:
     types: [checks_requested]
 
@@ -25,10 +25,7 @@ jobs:
   test:
     name: ${{ matrix.suite.name }}
     runs-on:
-      - x86_64
-      - spyre_pf
-      - linux
-      - image_torch_spyre
+      - self-hosted
     # increase timeout to 12 hours
     timeout-minutes: 720
     env:
@@ -91,6 +88,17 @@ jobs:
           - name: Tensor Layout
             config: torch_spyre_tests/tensors/test_tensor_layout_config.yaml
     steps:
+      - name: Login to OCP to run tests on spyre card
+        run: |
+          oc login \
+          --token="${{ secrets.OPENSHIFT_TOKEN }}" \
+          --server="${{ secrets.OPENSHIFT_SERVER }}"
+
+      - name: Verify access
+        run: |
+          oc whoami
+          oc projects
+
       - name: Checkout PR branch/commit in pre-cloned torch-spyre
         env:
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
