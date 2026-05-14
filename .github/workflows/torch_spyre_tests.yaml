@@ -88,7 +88,7 @@ jobs:
           - name: Tensor Layout
             config: torch_spyre_tests/tensors/test_tensor_layout_config.yaml
     steps:
-      - name: Login to OCP to run tests on spyre card
+      - name: Login to OCP cluster to run tests on spyre card
         run: |
           oc login \
           --token="${{ secrets.OPENSHIFT_TOKEN }}" \
