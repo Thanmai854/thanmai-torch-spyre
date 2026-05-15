@@ -99,6 +99,19 @@ jobs:
           oc whoami
           oc projects
 
+      - name: Verify dashboard is reachable
+        run: |
+          HTTP_CODE=$(curl -k -s -o /dev/null -w "%{http_code}" \
+            https://spyre-dashboard-spyre-cdev.apps.fmaas-backend.fmaas.res.ibm.com/)
+
+          echo "Dashboard returned HTTP $HTTP_CODE"
+
+          if [ "$HTTP_CODE" -ne 200 ]; then
+            echo "Dashboard is not reachable"
+            exit 1
+          fi
+      
+      
       - name: Checkout PR branch/commit in pre-cloned torch-spyre
         env:
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
